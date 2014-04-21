@@ -1,0 +1,41 @@
+{
+  "name": "v-dumka",
+  "homepage": "https://github.com/iofjuupasli/v-dumka",
+  "authors": [
+    "iofjuupasli <iofjuupasli@gmail.com>",
+    "YaGen <yahenmail@gmail.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "libs",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "requirejs": "~2.1.11",
+    "bootstrap": "~3.1.1",
+    "jquery": "1",
+    "lodash": "~2.4.1",
+    "requirejs-text": "~2.0.12",
+    "knockout.js": "gianpaj/knockout#3.1.0",
+    "durandal": "~2.0.1",
+    "moment": "~2.6.0",
+    "numeral": "~1.5.3",
+    "bootswatch": "~3.1.1+1",
+    "q": "~1.0.0",
+    "components-font-awesome": "~4.0.3",
+    "i18next": "~1.7.3"
+  },
+  "resolutions": {
+    "requirejs": "~2.1.11",
+    "requirejs-text": "~2.0.12",
+    "knockout.js": "3.1.0"
+  },
+  "devDependencies": {
+    "less.js": "~1.7.0"
+  }
+}
