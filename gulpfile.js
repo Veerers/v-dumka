@@ -28,7 +28,7 @@
     });
 
     gulp.task('server', function (next) {
-        connect().use(connect.static('./src/')).listen(8080, next);
+        connect().use(connect.static('./src/')).listen(8081, next);
     });
 
     gulp.task('watch', ['bower', 'less', 'server'], function () {
