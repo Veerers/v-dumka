@@ -32,7 +32,7 @@
     });
 
     gulp.task('watch', ['bower', 'less', 'server'], function () {
-        gulp.watch('src/bower.json', ['dev']);
+        gulp.watch('src/bower.json', ['bower']);
         gulp.watch(['src/main.less', 'src/app/**/*.less'], ['less']);
 
         var server = livereload();
