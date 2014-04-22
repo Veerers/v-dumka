@@ -59,8 +59,8 @@
 
         var i18NOptions = {
             useCookie: true,
-            preload: ['by', 'ru'],
-            fallbackLng: ['by', 'ru'],
+            preload: ['ru', 'by'],
+            fallbackLng: ['ru', 'by'],
             useLocalStorage: true,
             localStorageExpirationTime: 10800000, // 3 hours
             resGetPath: 'locales/__ns__-__lng__.json',
