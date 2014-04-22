@@ -1,60 +1,77 @@
 .main-container {
 
     .top-block {
-        min-height: 300px;
+        margin: 0 auto;
+        max-width: @screen-lg;
         text-align: center;
-        border-bottom: 1px solid @brand-primary;
-        padding: 0 10px;
+        padding: @padding-large-vertical @padding-large-horizontal;
         
         h1 {
-            font-size: 5em;
+            font-size: @super-large-font-size;
             @media (max-width: @screen-tablet) {
-                font-size: 2.5em;
+                font-size: @font-size-h1;
             }
         }
         h2 {
             @media (max-width: @screen-tablet) {
-                font-size: 1.6em;
+                font-size: @font-size-h3;
             }
         }
         .top-explanation {
-            font-size: 1.2em;
+            font-size: @font-size-large;
             @media (max-width: @screen-tablet) {
-                text-align: left;
+                width: 100%;
             }
-            width: 60%;
-            min-width: 300px;
-            margin: 30px auto;
+            width: 100% * (8 / 12);
+            margin: @padding-large-vertical auto;
             text-align: center;
         }
     }
     .detailes-block {
-        border-bottom: 1px solid @brand-primary;
-        position: relative;
-        .clearfix();
-
-        .explanation {
-            width: 33%;
-            @media (max-width: @screen-tablet) {
-                width: 100%;
-                text-align: left;
-                border-left: none;
-                border-bottom: 1px solid @brand-primary;
-                float: none;
-            }
-            float: left;
-            text-align: justify;
-            padding: 10px 40px 30px;
+        
+        &:before, &:after {
+            .lh-background-image(linear-gradient(to right, rgba(123,138,139,0) 0%,rgba(123,138,139,1) 15%,rgba(123,138,139,1) 85%,rgba(123,138,139,0) 100%));
             
-            &:first-child {
-                border-left: none;
-            }
+            content: '';
+            position: absolute;
+            height: 1px;
+            right: 0;
+            left: 0;
+        }
+        
+        padding: 1px 0;
+        //border-top: 1px solid @brand-primary;
+        //border-bottom: 1px solid @brand-primary;
+        position: relative;
+        
+        .explanations {
+            .clearfix();
+            max-width: @screen-lg;
+            margin: 0 auto;
 
-            h3 {
-                text-align: center;
-            }
-            .explanation-text {
+            .explanation {
+                width: 100% * (4 / 12);
+                @media (max-width: @screen-tablet) {
+                    width: 100%;
+                    text-align: left;
+                    border-left: none;
+                    border-bottom: 1px solid @brand-primary;
+                    float: none;
+                }
+                float: left;
+                text-align: justify;
+                padding: @padding-large-vertical @padding-large-horizontal;
 
+                &:first-child {
+                    border-left: none;
+                }
+
+                h3 {
+                    text-align: center;
+                }
+                .explanation-text {
+
+                }
             }
         }
     }
@@ -62,13 +79,19 @@
         
     }
     .footer {
-        
-        padding: 20px 0;
+        .clearfix();
+        max-width: @screen-lg;
+        margin: 0 auto;
+        padding: @padding-large-vertical @padding-large-horizontal;
+
         .menu {
-            width: 50%;
+            width: 100% * (6 / 12);
             float: left;
 
             ul {
+                width: 100% * (6 / 12);
+                padding: 0;
+
                 list-style: none;
 
                 li {
@@ -80,7 +103,7 @@
             }
         }
         .place {
-            width: 50%;
+            width: 100% * (6 / 12);
             float: left;
 
             .map {
