@@ -21,7 +21,7 @@
         });
     });
 
-    gulp.task('less', function () {
+    gulp.task('less', ['bower'], function () {
         gulp.src('src/main.less')
             .pipe(less())
             .pipe(gulp.dest('src'));
