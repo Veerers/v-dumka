@@ -8,6 +8,18 @@
     var preprocess = require('gulp-preprocess');
     var connect = require('connect');
     var livereload = require('gulp-livereload');
+    var durandal = require('gulp-durandal');
+
+    gulp.task('durandal', function(){
+        durandal({
+                baseDir: 'src/app',
+                main: 'main.js',
+                output: 'bundle.main.js',
+                almond: true,
+                minify: true
+            })
+            .pipe(gulp.dest('test'));
+    });
 
     gulp.task('clean', function () {
         gulp.src(['public', 'src/libs'])

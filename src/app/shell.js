@@ -15,9 +15,9 @@ define(function (require) {
         router: router,
         activate: function () {
             router.map([{
-                route: '(main)',
+                route: '(home)',
                 title: i18n.t('home'),
-                moduleId: 'main/main',
+                moduleId: 'home/home',
                 isMain: true,
                 img: undefined
             }, {
