@@ -30,8 +30,8 @@
     .detailes-block {
         
         &:before, &:after {
-            .lh-background-image(linear-gradient(to right, rgba(123,138,139,0) 0%,rgba(123,138,139,1) 15%,rgba(123,138,139,1) 85%,rgba(123,138,139,0) 100%));
-            
+            .lh-background-image(linear-gradient(to right, fade(@gray, 0%) 0%, @gray 15%, @gray 85%, fade(@gray, 0%) 100%));
+
             content: '';
             position: absolute;
             height: 1px;
@@ -40,10 +40,8 @@
         }
         
         padding: 1px 0;
-        //border-top: 1px solid @brand-primary;
-        //border-bottom: 1px solid @brand-primary;
         position: relative;
-        
+
         .explanations {
             .clearfix();
             max-width: @screen-lg;
@@ -76,7 +74,8 @@
         }
     }
     .principles-carousel {
-        background: darken(@brand-success, 25%);
+        @carousel-background: darken(@brand-success, 25%);
+        background: @carousel-background;
         color: @gray-lighter;
         
         .carousel-wrapper {
@@ -87,17 +86,18 @@
             
             ul {
                 margin: 50px 0;
-                width: 500%;
+                @slides: 5;
+                width: 100% * @slides;
                 list-style: none;
                 padding: 0;
                 position: relative;
-                transition: left .2s;
+                transition: left @transition-duration-long;
                 .clearfix();
 
                 li {
-                    width: 20%;
+                    width: 100% / @slides;
                     float: left;
-                    padding: @padding-large-vertical 100% * (2 / 12) / 5;
+                    padding: @padding-large-vertical 100% * (2 / 12) / @slides;
                     .clearfix();
 
                     h3 {
@@ -116,7 +116,11 @@
                         background-size: cover;
                         background-position: center;
                         float: right;
-                        margin-top: -@size / 4;
+                        padding-top: -@size / 4;
+                        @media (max-width: @screen-tablet) {
+                            // float: none;
+                            margin-top: 20px;
+                        }
                         
                         &.volunteering-img {
                             background-image: url(img/volunteering.jpg);
@@ -137,13 +141,13 @@
                 top: 50%;
                 margin: -@height / 2 20px;
                 font-size: @height;
-                color: darken(@brand-success, 30%);
-                transition: color .3s;
-                text-shadow: 1px 1px 1px rgba(30, 30, 30, .6);
+                color: darken(@carousel-background, 5%);
+                transition: color @transition-duration-quick;
+                text-shadow: 1px 1px 1px darken(@carousel-background, 8%);
                 
                 &:hover {
                     text-decoration: none;
-                    color: darken(@brand-success, 20%);
+                    color: lighten(@carousel-background, 5%);
                 }
                 
                 &.left {
@@ -165,19 +169,19 @@
                 text-align: center;
                 
                 li {
-                    transition: background .3s;
-                    box-shadow: inset 1px 1px 1px rgba(30, 30, 30, .6);
+                    transition: background @transition-duration-quick;
+                    box-shadow: inset 1px 1px 1px darken(@carousel-background, 8%);
                     @size: 12px;
                     width: @size;
                     height: @size;
                     border-radius: @size / 2;
                     display: inline-block;
                     cursor: pointer;
-                    background: darken(@brand-success, 30%);
+                    background: darken(@carousel-background, 5%);
                     margin: 0 7%;
                     
                     &.active {
-                        background: darken(@brand-success, 20%);
+                        background: lighten(@carousel-background, 5%);
                     }
                 }
             }
