@@ -5,19 +5,19 @@
     var spawn = require('child_process').spawn;
     var less = require('gulp-less');
     var clean = require('gulp-clean');
-    var preprocess = require('gulp-preprocess');
+    //var preprocess = require('gulp-preprocess');
     var connect = require('connect');
     var livereload = require('gulp-livereload');
     var durandal = require('gulp-durandal');
 
-    gulp.task('durandal', function(){
+    gulp.task('durandal', function () {
         durandal({
-                baseDir: 'src/app',
-                main: 'main.js',
-                output: 'bundle.main.js',
-                almond: true,
-                minify: true
-            })
+            baseDir: 'src/app',
+            main: 'main.js',
+            output: 'bundle.main.js',
+            almond: true,
+            minify: true
+        })
             .pipe(gulp.dest('test'));
     });
 

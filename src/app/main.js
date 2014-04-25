@@ -10,7 +10,6 @@
             'transitions': '../libs/durandal/js/transitions',
             'plugins': '../libs/durandal/js/plugins',
             'i18next': '../libs/i18next/i18next.amd.withJQuery',
-            'jcarousel': '../libs/jcarousel/dist/jquery.jcarousel',
             'jquery': '../libs/jquery/jquery',
             'knockout': '../libs/knockout.js/knockout',
             'lodash': '../libs/lodash/dist/lodash',
@@ -20,8 +19,7 @@
             'text': '../libs/requirejs-text/text'
         },
         shim: {
-            'bootstrap': ['jquery'],
-            'jcarousel': ['jquery']
+            'bootstrap': ['jquery']
         }
     });
 
@@ -33,10 +31,9 @@
         var $ = require('jquery');
         var Q = require('q');
         var i18next = require('i18next');
-        
+
         // init plugins
-        var bootstrap = require('bootstrap');
-        // var jcarousel = require('jcarousel');
+        require('bootstrap');
 
         //@ifdef DEV
         system.debug(true);
