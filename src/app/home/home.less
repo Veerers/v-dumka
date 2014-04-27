@@ -46,6 +46,7 @@
             .clearfix();
             max-width: @screen-lg;
             margin: 0 auto;
+            padding-bottom: @padding-large-vertical;
 
             .explanation {
                 width: 100% * (4 / 12);
@@ -134,16 +135,20 @@
             }
             .arrow {
                 .glyphicon;
+                @container-height: 60px;
+                width: 40px;
                 @height: 20px;
-                height: @height;
+                height: @container-height;
                 display: block;
                 position: absolute;
                 top: 50%;
-                margin: -@height / 2 20px;
+                margin: -@container-height / 2 20px;
+                padding-top: @container-height / 2 - @height / 2;
                 font-size: @height;
                 color: darken(@carousel-background, 5%);
                 transition: color @transition-duration-quick;
                 text-shadow: 1px 1px 1px darken(@carousel-background, 8%);
+                text-align: center;
                 
                 &:hover {
                     text-decoration: none;
