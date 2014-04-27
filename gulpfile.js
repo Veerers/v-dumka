@@ -8,7 +8,7 @@
     //var preprocess = require('gulp-preprocess');
     var connect = require('connect');
     var livereload = require('gulp-livereload');
-    var durandal = require('gulp-durandal');
+    //var durandal = require('gulp-durandal');
 
     gulp.task('durandal', function () {
         durandal({
