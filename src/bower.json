@@ -36,7 +36,6 @@
     "knockout.js": "3.1.0"
   },
   "devDependencies": {
-    "less.js": "~1.7.0",
     "lesshat": "~3.0.0"
   }
 }

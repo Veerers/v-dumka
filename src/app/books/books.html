@@ -1,1 +1,6 @@
-<div>books</div>
+<div>
+    <input type="text" data-bind="value: search, valueUpdate: 'input'">
+    <div data-bind="foreach: booksFiltered">
+        <div data-bind="text: title"></div>
+    </div>
+</div>
