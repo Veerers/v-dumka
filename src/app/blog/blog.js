@@ -4,6 +4,7 @@ define(function (require) {
     'use strict';
 
     var ko = require('knockout');
+    var BlogGrid = require('./blogGrid');
 
     var Article = (function(){
         var Class = function(id, header, date, description){
@@ -12,7 +13,6 @@ define(function (require) {
             that.header = header;
             that.date = date;
             that.description = description;
-            that.text = text;
         }
         
         return Class;
@@ -27,7 +27,13 @@ define(function (require) {
         new Article(17, "Header", "13.04", "asdg")
     ];
 
+    var blogGrid = new BlogGrid({
+        data: articles,
+        pageSize: 4
+    })
+
     return {
-        items: articles
+        items: articles,
+        blogGrid: blogGrid
     };
 });
