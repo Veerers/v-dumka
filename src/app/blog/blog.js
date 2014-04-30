@@ -47,10 +47,8 @@ define(function (require) {
         pageSize: 4
     })
 
-    var goToPost = function(_id){ location.hash = '#blog/' + _id; }
 
     return {
-        blogGrid: blogGrid,
-        goToPost: goToPost
+        blogGrid: blogGrid
     };
 });
