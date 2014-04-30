@@ -12,9 +12,7 @@ define(function (require) {
         }
 
         Class.prototype.search = function (text) {
-            var that = this;
-            var reg = /[а-яА-Я’\d\w]+/gi;
-            var normalizer = function (string) {
+            function normalizer(string) {
                 return string
                     .replace('ё', 'е')
                     .replace('й', 'и')
@@ -24,7 +22,15 @@ define(function (require) {
                     .replace('Й', 'И')
                     .replace('І', 'И')
                     .replace('Ў', 'У');
-            };
+            }
+            function contains(base, string) {
+                return normalizer(base.toString()).toLowerCase().indexOf(normalizer(string.toString()).toLowerCase()) !== -1;
+            }
+            if (_.isEmpty(text)) {
+                return this.data;
+            }
+            var that = this;
+            var reg = /[а-яА-Я’\d\w]+/gi;
             var words = normalizer(text).match(reg);
             return _(this.data)
                 .map(function (item) {
@@ -36,31 +42,27 @@ define(function (require) {
                         _.forEach(words, function (word) {
                             if (_.isArray(item[key])) {
                                 _.forEach(item[key], function (subItem) {
-                                    if (normalizer(subItem.toString()).toLowerCase().indexOf(word.toLowerCase()) !== -1) {
+                                    if (contains(subItem, word)) {
                                         points += value;
                                     }
                                 });
                                 return;
                             }
-                            if (normalizer(item[key].toString()).toLowerCase().indexOf(word.toLowerCase()) !== -1) {
+                            if (contains(item[key], word)) {
                                 points += value;
                             }
                         });
                     });
                     return {
                         points: points,
-                        item: item
+                        value: item
                     };
                 })
-                .filter(function (item) {
-                    return item.points > 0;
-                })
+                .filter('points')
                 .sortBy(function (item) {
                     return -item.points;
                 })
-                .map(function (item) {
-                    return item.item;
-                })
+                .map('value')
                 .valueOf();
         };
 

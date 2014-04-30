@@ -3,41 +3,31 @@
 define(function (require) {
     'use strict';
 
-    var server = require('server');
+    var cache = require('services/cache');
     var ko = require('knockout');
-    var _ = require('lodash');
     var Search = require('services/search');
 
-    var index;
     var searchConfig = {
-        title: 2,
-        author: 2,
+        title: 4,
+        author: 4,
         year: 2,
         publisher: 1,
         tags: 3
     };
 
-    var books = ko.observableArray();
+    var books = cache.books.data;
+    var index = ko.computed(function () {
+        return new Search(searchConfig, books());
+    });
     var search = ko.observable();
     var booksFiltered = ko.computed(function () {
-        if (_.isEmpty(search())) {
-            return books();
-        }
-        return index.search(search());
+        return index().search(search());
     });
 
     return {
         activate: function () {
             search('');
-            if (!_.isEmpty(books())) {
-                //TODO use cache module
-                return;
-            }
-            return server.books.get()
-                .then(function (data) {
-                    books(data);
-                    index = new Search(searchConfig, books());
-                });
+            cache.books.update();
         },
 
         search: search,
