@@ -4,27 +4,42 @@ define(function (require) {
     'use strict';
 
     var ko = require('knockout');
-    var BlogGrid = require('./blogGrid');
+    var BlogGrid = (function(){
+
+        var BlogGrid = function(config){
+        var that = this;
+
+        that.data = config.data;
+        that.currentPageIndex = ko.observable(0);
+        that.pageSize = config.pageSize || 5;
+
+        that.itemsOnCurrentPage = ko.computed(function() {
+            var startIndex = that.pageSize * that.currentPageIndex();
+            return that.data.slice(startIndex, startIndex + that.pageSize);
+        }, that);
+    }
+
+    return BlogGrid;
+
+    }());
 
     var Article = (function(){
-        var Class = function(id, header, date, description){
+        var Class = function(data){
             var that = this;
-            that.id = id;
-            that.header = header;
-            that.date = date;
-            that.description = description;
+            that._id = data.title;
+            that.date = data.date;
         }
         
         return Class;
     }());
 
     var articles = [
-        new Article(13, "Header", "13.04", "asdg"),
-        new Article(12, "Header", "13.04", "asdg"),
-        new Article(14, "Header", "13.04", "asdg"),
-        new Article(15, "Header", "13.04", "asdg"),
-        new Article(16, "Header", "13.04", "asdg"),
-        new Article(17, "Header", "13.04", "asdg")
+        new Article({"title":"13","data" : "13.04"}),
+        new Article({"title":"12","data" : "13.04"}),
+        new Article({"title":"14","data" : "13.04"}),
+        new Article({"title":"15","data" : "13.04"}),
+        new Article({"title":"16","data" : "13.04"}),
+        new Article({"title":"17","data" : "13.04"})
     ];
 
     var blogGrid = new BlogGrid({
