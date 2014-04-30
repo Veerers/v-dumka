@@ -33,6 +33,12 @@ define(function (require) {
                 isMain: false,
                 img: 'blog'
             }, {
+                route: 'blog/:id',
+                title: i18n.t('blog'),
+                moduleId: 'article/article',
+                isMain: false,
+                img: 'blog'
+            }, {
                 route: 'events',
                 title: i18n.t('events'),
                 moduleId: 'events/events',

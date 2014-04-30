@@ -5,23 +5,29 @@ define(function (require) {
 
     var ko = require('knockout');
 
-    function Article(date, description){
-    	var self = this;
-    	self.date = date;
-    	self.description = description;
-    }
+    var Article = (function(){
+        var Class = function(id, header, date, description){
+            var that = this;
+            that.id = id;
+            that.header = header;
+            that.date = date;
+            that.description = description;
+            that.text = text;
+        }
+        
+        return Class;
+    }());
 
-    function ArticlesViewModel(){
-    	var self = this;
+    var articles = [
+        new Article(13, "Header", "13.04", "asdg"),
+        new Article(12, "Header", "13.04", "asdg"),
+        new Article(14, "Header", "13.04", "asdg"),
+        new Article(15, "Header", "13.04", "asdg"),
+        new Article(16, "Header", "13.04", "asdg"),
+        new Article(17, "Header", "13.04", "asdg")
+    ];
 
-    	self.articles = ko.observableArray([
-    			new Article("13.04", "Ko ko ko"),
-    			new Article("14.04", "Ko ko ko")
-    		]);
-    }
-
-    ko.applyBindings(new ArticlesViewModel());	
-
-
-    return {};
+    return {
+        items: articles
+    };
 });

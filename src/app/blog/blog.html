@@ -1,12 +1,5 @@
 <div>blog</div>
-<table>
-	<thead>
-		<th>Articles: </th>
-	</thead>
-	<tbody data-binds = "foreach: articles">
-		<tr>
-			<td data-bind = "text: date"></td>
-			<td data-bind = "text: description"></td>
-		</tr>
-	</tbody>
-</table>
+
+<div data-bind="foreach: items">
+    <div data-bind="text: header"></div>
+</div>
