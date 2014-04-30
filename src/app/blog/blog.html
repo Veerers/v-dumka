@@ -1,3 +1,7 @@
-<div data-bind="foreach: blogGrid.itemsOnCurrentPage">
-    <div data-bind="text: _id"></div>
-</div>
+<table>
+    <tbody data-bind="foreach: blogGrid.itemsOnCurrentPage">
+        <tr data-bind="click: $root.goToPost">
+            <td data-bind="text:_id"></td>
+        </tr>
+    </tbody>
+</table>
