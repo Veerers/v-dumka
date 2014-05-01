@@ -2,3 +2,4 @@ public
 src/libs
 src/main.css
 node_modules
+server/config.js

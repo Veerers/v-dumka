@@ -1,0 +1,167 @@
+.books-container {
+    text-align: center;
+    background-color: #eee;
+    margin: 0;
+    padding: 40px 0;
+    
+    a {
+        transition: opacity .1s;
+        opacity: .7;
+    }
+    
+    a:hover {
+        text-decoration: none;
+        opacity: 1;
+    }
+    
+    .search-bar {
+        margin: 0 auto 40px;
+        width: 80%;
+        max-width: 600px;
+        position: relative;
+        
+        .search-input {
+            .form-control;
+            .input-lg;
+            padding-left: 50px;
+        }
+        .search-icon {
+            .glyphicon;
+            .glyphicon-search;
+            position: absolute;
+            left: 10px;
+            top: 0;
+            bottom: 0;
+            margin: auto 10px;
+            height: 20px;
+            display: block;
+            font-size: 20px;
+        }
+        .clear-icon {
+            .glyphicon;
+            .glyphicon-remove;
+            position: absolute;
+            right: 10px;
+            top: 0;
+            bottom: 0;
+            margin: auto 10px;
+            height: 20px;
+            display: block;
+            font-size: 20px;
+        }
+    }
+    .books-list {
+        
+        list-style: none;
+        padding: 0;
+        width: 80%;
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #fff;
+        border-radius: 5px;
+        min-height: 500px;
+        box-shadow: 1px 1px 1px 0px rgba(50, 50, 50, 0.1);
+
+        .book-row {
+            @media (max-width: @screen-xs) {
+                height: 90px;
+            }
+            height: 70px;
+            overflow: hidden;
+            transition: height .3s;
+            border-bottom: 1px solid #eee;
+            margin: 0 10px;
+            
+            &.expanded {
+                height: 140px;
+                @media (max-width: @screen-xs) {
+                    height: 170px;
+                }
+                .main-info-row .show-more-btn {
+                    .glyphicon-chevron-up;
+                }
+            }
+            .main-info-row {
+                @media (max-width: @screen-xs) {
+                    height: 90px;
+                }
+                height: 70px;
+                padding-top: 25px;
+
+                .books-title {
+                    display: block;
+                    text-align: left;
+                    padding-left: 25px;
+                    line-height: 1;
+                    font-size: 18px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    width: 6 / 12 * 100%;
+                    float: left;
+                    @media (max-width: @screen-xs) {
+                        width: 100%;
+                        padding-bottom: 8px;
+                    }
+                }
+                .books-author {
+                    display: block;
+                    width: 3 / 12 * 100%;
+                    float: left;
+                }
+                .books-year {
+                    display: block;
+                    width: 2 / 12 * 100%;
+                    float: left;
+                }
+                .show-more-btn {
+                    .glyphicon;
+                    .glyphicon-chevron-down;
+                    display: block;
+                    font-size: 14px;
+                    width: 1 / 12 * 100%;
+                    float: right;
+                    padding-top: 2px;
+                }
+            }
+            .additional-info-row {
+                border-top: 1px solid #f6f6f6;
+                .make-row();
+                padding: 10px 15px;
+                text-align: left;
+                
+                .tags-container {
+                    .make-xs-column(7);
+                    padding-left: 30px;
+                    
+                    .tags-label{
+                        font-size: 12px;
+                    }
+                    .tags-list {
+                        list-style: none;
+                        padding: 0;
+                        
+                        .book-tag {
+
+                            .tag-link {
+                                float: left;
+                                padding-right: 15px;
+
+                            }
+                        }
+                    }
+                }
+                
+                .book-publisher {
+                    .make-xs-column(5);
+                    .publisher-label {
+                        font-size: 12px;
+                    }
+                    .publisher {
+                        display: block;
+                    }
+                }
+            }
+        }
+    }
+}

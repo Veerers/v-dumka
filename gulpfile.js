@@ -1,4 +1,4 @@
-/*jslint nomen: true, vars: true*/
+/*jslint nomen: true, vars: true, unparam: true*/
 (function () {
     'use strict';
     var gulp = require('gulp');
@@ -8,6 +8,24 @@
     //var preprocess = require('gulp-preprocess');
     var livereload = require('gulp-livereload');
     //var durandal = require('gulp-durandal');
+    var prompt = require('gulp-prompt');
+    var fs = require('fs');
+
+    gulp.task('config', function (next) {
+        gulp.src('')
+            .pipe(prompt.prompt([{
+                type: 'input',
+                name: 'connectionString',
+                message: 'Mongo connection string:'
+            }], function (res) {
+                fs.readFile('server/config.template.js', function (err, data) {
+                    fs.writeFile('server/config.js', data.toString().replace('{{connectionString}}', res.connectionString),
+                        function () {
+                            next();
+                        });
+                });
+            }));
+    });
 
     gulp.task('durandal', function () {
         durandal({
@@ -44,7 +62,7 @@
             .pipe(gulp.dest('src'));
     });
 
-    gulp.task('server', function () {
+    gulp.task('server', ['config'], function () {
         var server = spawn('node', ['--debug', 'server/app.js']);
         server.stdout.pipe(process.stdout);
         process.on('exit', function () {
@@ -62,7 +80,7 @@
 
     gulp.task('dev', ['bower', 'less']);
 
-    gulp.task('watch', ['bower', 'less', 'server', 'server-inspector'], function () {
+    gulp.task('watch', ['config', 'bower', 'less', 'server', 'server-inspector'], function () {
         gulp.watch('src/bower.json', ['bower']);
         gulp.watch(['src/main.less', 'src/app/**/*.less'], ['less']);
 
