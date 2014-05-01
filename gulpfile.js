@@ -100,7 +100,7 @@
     });
 
     // gulp.task('public');
-    gulp.task('heroku:production', ['watch']);
+    gulp.task('heroku:production', ['config', 'bower', 'less', 'server']);
 
     gulp.task('default', ['watch']);
 }());
