@@ -12,7 +12,15 @@
     var fs = require('fs');
 
     gulp.task('config', function (next) {
-        gulp.src('')
+        fs.readFile('server/config.template.js', function (err, data) {
+            var file = data.toString()
+                .replace('{{connectionString}}', process.env.MONGO_CONNECTION_STRING);
+            fs.writeFile('server/config.js', file,
+                function () {
+                    next();
+                });
+        });
+        /*gulp.src('')
             .pipe(prompt.prompt([{
                 type: 'input',
                 name: 'connectionString',
@@ -24,7 +32,7 @@
                             next();
                         });
                 });
-            }));
+            }));*/
     });
 
     gulp.task('durandal', function () {
@@ -92,6 +100,7 @@
     });
 
     // gulp.task('public');
+    gulp.task('heroku:production', ['watch']);
 
     gulp.task('default', ['watch']);
 }());

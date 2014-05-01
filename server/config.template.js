@@ -1,4 +1,4 @@
 module.exports = {
     mongodbConnectionString: '{{connectionString}}',
-    defaultPort: 3000
+    defaultPort: 80
 };
