@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "main": "gulpfile.js",
   "scripts": {
-    "start": "gulp",
+    "start": "node server/app.js",
     "build": "gulp dev"
   },
   "repository": {
