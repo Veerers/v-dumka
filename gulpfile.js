@@ -10,6 +10,10 @@
     //var durandal = require('gulp-durandal');
     var prompt = require('gulp-prompt');
     var fs = require('fs');
+    var bower = require('bower');
+
+    bower.config.directory = 'libs';
+    bower.config.cwd += '/src';
 
     gulp.task('config', function (next) {
         fs.readFile('server/config.template.js', function (err, data) {
@@ -52,15 +56,9 @@
     });
 
     gulp.task('bower', function (next) {
-        var bower = spawn('bower', ['install'], {
-            cwd: 'src'
-        });
-        bower.stdout.pipe(process.stdout);
-        bower.on('close', function () {
+        bower.commands.install([], {}).on('end', function (data) {
+            console.dir(data);
             next();
-        });
-        process.on('exit', function () {
-            bower.kill();
         });
     });
 
