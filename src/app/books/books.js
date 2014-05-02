@@ -1,46 +1,51 @@
-/*jslint nomen: true, vars: true*/
+/*jslint nomen: true, vars: true, unparam: true*/
 /*global define*/
 define(function (require) {
     'use strict';
 
-    var server = require('server');
+    var cache = require('services/cache');
     var ko = require('knockout');
-    var _ = require('lodash');
     var Search = require('services/search');
+    var $ = require('jquery');
 
-    var index;
     var searchConfig = {
-        title: 2,
-        author: 2,
+        title: 4,
+        author: 4,
         year: 2,
         publisher: 1,
         tags: 3
     };
 
-    var books = ko.observableArray();
+    var books = cache.books.data;
+    var index = ko.computed(function () {
+        return new Search(searchConfig, books());
+    });
     var search = ko.observable();
     var booksFiltered = ko.computed(function () {
-        if (_.isEmpty(search())) {
-            return books();
-        }
-        return index.search(search());
-    });
+        return index().search(search()).slice(0, 20);
+    }).extend({rateLimit: 500});
 
     return {
         activate: function () {
-            search('');
-            if (!_.isEmpty(books())) {
-                //TODO use cache module
-                return;
-            }
-            return server.books.get()
-                .then(function (data) {
-                    books(data);
-                    index = new Search(searchConfig, books());
+            // search('');
+            cache.books.update();
+        },
+        binding: function(view){
+            $('.search-input')
+                .keydown(function(e){
+                    if (e.which === 27) {
+                        search('');
+                    }
                 });
         },
 
         search: search,
-        booksFiltered: booksFiltered
+        booksFiltered: booksFiltered,
+        showAdditional: function (data, e) {
+            $(e.target).closest('.book-row').toggleClass('expanded');
+        },
+        searchBy: function(text){
+            search('' + text);
+        }
     };
 });

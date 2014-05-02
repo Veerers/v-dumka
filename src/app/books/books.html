@@ -1,6 +1,29 @@
-<div>
-    <input type="text" data-bind="value: search, valueUpdate: 'input'">
-    <div data-bind="foreach: booksFiltered">
-        <div data-bind="text: title"></div>
+<div class="books-container">
+    <div class="search-bar">
+        <input class="search-input" type="text" placeholder="Название книги, автор, год или жанр..." data-bind="value: search, valueUpdate: 'input'">
+        <i class="search-icon"></i>
+        <a href="#" class="clear-icon" title="[Esc]" data-bind="visible: search, click: search.bind(null, '')"></a>
     </div>
+    <ul class="books-list" data-bind="foreach: booksFiltered">
+        <li class="book-row">
+            <div class="main-info-row">
+                <span class="books-title" data-bind="text: title"></span>
+                <a class="books-author" href="#" data-bind="text: author, click: $parent.searchBy.bind(null, $data.author)"></a>
+                <a class="books-year" href="#" data-bind="text: year, click: $parent.searchBy.bind(null, $data.year)"></a>
+                <a class="show-more-btn" href="#" data-bind="click: $parent.showAdditional"></a>
+            </div>
+            <div class="additional-info-row">
+                <div class="tags-container">
+                    <div class="tags-label">Категории:</div>
+                    <ul class="tags-list" href="#" data-bind="foreach: tags">
+                        <li class="book-tag"><a class="tag-link" href="#" data-bind="text: $data, click: $parents[1].searchBy.bind(null, $data)"></a></li>
+                    </ul>
+                </div>
+                <div class="book-publisher">
+                    <div class="publisher-label">Издательство:</div>
+                    <a class="publisher" href="#" data-bind="text: publisher, click: $parent.searchBy.bind(null, $data.publisher)"></a>
+                </div>
+            </div>
+        </li>
+    </ul>
 </div>

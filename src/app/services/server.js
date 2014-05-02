@@ -8,10 +8,17 @@ define(function (require) {
 
     return {
         books: {
-            get: function (id) {
+            get: function () {
                 return q($.ajax({
                     type: 'GET',
-                    url: 'api/books/' + (id === undefined ? '' : id),
+                    url: 'api/books',
+                    dataType: 'json'
+                }));
+            },
+            count: function () {
+                return q($.ajax({
+                    type: 'GET',
+                    url: 'api/books?countOnly=true',
                     dataType: 'json'
                 }));
             }

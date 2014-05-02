@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "main": "gulpfile.js",
   "scripts": {
-    "start": "gulp",
+    "start": "node server/app.js",
     "build": "gulp dev"
   },
   "repository": {
@@ -12,18 +12,20 @@
   },
   "license": "MIT",
   "homepage": "https://github.com/iofjuupasli/v-dumka",
-  "devDependencies": {
+  "devDependencies": {},
+  "dependencies": {
+    "body-parser": "^1.0.2",
+    "bower": "^1.3.3",
+    "express": "^4.1.1",
     "gulp": "^3.6.1",
     "gulp-clean": "^0.2.4",
     "gulp-durandal": "^1.1.0",
     "gulp-less": "^1.2.3",
     "gulp-livereload": "^1.3.1",
     "gulp-preprocess": "^1.0.1",
+    "gulp-prompt": "^0.1.1",
+    "lodash": "^2.4.1",
+    "mongoose": "^3.8.8",
     "nodemon": "^1.0.17"
-  },
-  "dependencies": {
-    "body-parser": "^1.0.2",
-    "express": "^4.1.1",
-    "lodash": "^2.4.1"
   }
 }
