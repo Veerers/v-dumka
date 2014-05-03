@@ -23,28 +23,11 @@ define(function (require) {
 
     }());
 
-    var Article = (function(){
-        var Class = function(data){
-            var that = this;
-            that._id = data.title;
-            that.date = data.date;
-        }
-        
-        return Class;
-    }());
-
-    var articles = [
-        new Article({"title":"13","data" : "13.04"}),
-        new Article({"title":"12","data" : "13.04"}),
-        new Article({"title":"14","data" : "13.04"}),
-        new Article({"title":"15","data" : "13.04"}),
-        new Article({"title":"16","data" : "13.04"}),
-        new Article({"title":"17","data" : "13.04"})
-    ];
+    var articles = /* TODO get from db*/;
 
     var blogGrid = new BlogGrid({
         data: articles,
-        pageSize: 4
+        pageSize: 2
     })
 
 

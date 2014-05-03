@@ -8,3 +8,10 @@ module.exports.books = new Schema({
     review: String,
     tags: [String]
 });
+
+module.exports.blog = new Schema({
+    title: String,
+    date: String,
+    text: String,
+    tags: [String]
+});
