@@ -80,7 +80,7 @@
         gulp.src('src/libs/bootstrap/fonts/**').pipe(gulp.dest('public/libs/bootstrap/fonts'));
     });
 
-    gulp.task('prod:css', ['dev'], function () {
+    gulp.task('prod:css', ['dev:less', 'dev'], function () {
         gulp.src('src/main.css')
             .pipe(minifyCss({
                 processImport: true,
