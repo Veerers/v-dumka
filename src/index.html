@@ -4,30 +4,27 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- @ifdef DEV -->
+    <!-- @exclude -->
     <title>Dev - Вольная Думка</title>
-    <!-- @endif -->
-    <!-- @ifndef DEV !>
+    <!-- @endexclude -->
+
+    <!-- @if true !>
     <title>Вольная Думка</title>
     <!-- @endif -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- @ifdef DEV -->
     <link rel="stylesheet" href="main.css">
-    <!-- @endif -->
-    <!-- @ifndef DEV !>
-    <link rel="stylesheet" href="bundle.min.css">
-    <!-- @endif -->
 </head>
 
 <body>
 
     <div id="application"></div>
 
-    <!-- @ifdef DEV -->
-    <script src="libs/requirejs/require.js" data-main="app/main" ></script>
-    <!-- @endif -->
-    <!-- @ifndef DEV !>
-    <script src="bundle.min.js"></script>
+    <!-- @exclude -->
+    <script src="libs/requirejs/require.js" data-main="app/main"></script>
+    <!-- @endexclude -->
+
+    <!-- @if true !>
+    <script src="main.js" data-main="app/main"></script>
     <!-- @endif -->
 
 </body>

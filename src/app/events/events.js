@@ -1,6 +1,6 @@
 /*jslint nomen: true, vars: true*/
 /*global define*/
-define(function (require) {
+define(function () {
     'use strict';
 
     return {};
