@@ -129,7 +129,7 @@
     });
 
     gulp.task('lint', function () {
-        gulp.src('src/app/**/*.js')
+        gulp.src(['src/app/**/*.js', 'server/**/*.js'])
             .pipe(jslint());
     });
 

@@ -1,3 +1,4 @@
+/*jslint node:true*/
 var Schema = require('mongoose').Schema;
 
 module.exports.books = new Schema({
