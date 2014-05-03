@@ -4,7 +4,7 @@
         <i class="search-icon"></i>
         <a href="#" class="clear-icon" title="[Esc]" data-bind="visible: search, click: search.bind(null, '')"></a>
     </div>
-    <ul class="books-list" data-bind="foreach: booksFiltered">
+    <ul class="books-list" data-bind="foreach: books">
         <li class="book-row">
             <div class="main-info-row">
                 <span class="books-title" data-bind="text: title"></span>
@@ -25,5 +25,12 @@
                 </div>
             </div>
         </li>
+    </ul>
+    <ul class="books-paging">
+        <li class="first-page" data-bind="click: paging.goTo.bind(null, 1)">1</li>
+        <li class="prev-page" data-bind="style: {visibility: paging.current() > 1 ? 'visible' : 'hidden'}, click: paging.prev"></li>
+        <li class="current-page" data-bind="text: paging.current"></li>
+        <li class="next-page" data-bind="style: {visibility: paging.current() < paging.last() ? 'visible' : 'hidden'}, click: paging.next"></li>
+        <li class="last-page" data-bind="text: paging.last, click: paging.goTo.bind(null, $data.paging.last())"></li>
     </ul>
 </div>

@@ -15,16 +15,28 @@ define(function (require) {
         publisher: 1,
         tags: 3
     };
-
+    
     var books = cache.books.data;
     var index = ko.computed(function () {
         return new Search(searchConfig, books());
     });
     var search = ko.observable();
     var booksFiltered = ko.computed(function () {
-        return index().search(search()).slice(0, 20);
+        return index().search(search());
     }).extend({
-        rateLimit: 500
+        rateLimit: 100
+    });
+
+    var perPage = 10;
+    var currentPage = ko.observable(1);
+    search.subscribe(function(){
+        currentPage(1);
+    });
+    var totalPages = ko.computed(function(){
+        return Math.ceil(booksFiltered().length / perPage);
+    });
+    var itemsOnPage = ko.computed(function(){
+        return booksFiltered().slice(currentPage() * perPage - perPage, currentPage() * perPage);
     });
 
     return {
@@ -39,14 +51,31 @@ define(function (require) {
                     }
                 });
         },
-
+        
         search: search,
-        booksFiltered: booksFiltered,
+        books: itemsOnPage,
         showAdditional: function (data, e) {
             $(e.target).closest('.book-row').toggleClass('expanded');
         },
         searchBy: function (text) {
             search(text.toString());
+        },
+        paging: {
+            current: currentPage,
+            last: totalPages,
+            goTo: function(page){
+                currentPage(+page);
+            },
+            next: function(){
+                if (currentPage() < totalPages()){
+                    currentPage(currentPage() + 1);
+                }
+            },
+            prev: function(){
+                if (currentPage() > 1) {
+                    currentPage(currentPage() - 1);
+                }
+            }
         }
     };
 });
