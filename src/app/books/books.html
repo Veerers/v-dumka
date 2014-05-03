@@ -1,6 +1,6 @@
 <div class="books-container">
     <div class="search-bar">
-        <input class="search-input" type="text" placeholder="Название книги, автор, год или жанр..." data-bind="value: search, valueUpdate: 'input'">
+        <input class="search-input" type="text" data-i18n="[placeholder]search-placeholder" data-bind="value: search, valueUpdate: 'input'">
         <i class="search-icon"></i>
         <a href="#" class="clear-icon" title="[Esc]" data-bind="visible: search, click: search.bind(null, '')"></a>
     </div>
@@ -14,13 +14,13 @@
             </div>
             <div class="additional-info-row">
                 <div class="tags-container">
-                    <div class="tags-label">Категории:</div>
+                    <div class="tags-label" data-i18n="categories"></div>
                     <ul class="tags-list" href="#" data-bind="foreach: tags">
                         <li class="book-tag"><a class="tag-link" href="#" data-bind="text: $data, click: $parents[1].searchBy.bind(null, $data)"></a></li>
                     </ul>
                 </div>
                 <div class="book-publisher">
-                    <div class="publisher-label">Издательство:</div>
+                    <div class="publisher-label" data-i18n="publisher"></div>
                     <a class="publisher" href="#" data-bind="text: publisher, click: $parent.searchBy.bind(null, $data.publisher)"></a>
                 </div>
             </div>
