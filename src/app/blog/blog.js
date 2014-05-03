@@ -4,34 +4,42 @@ define(function (require) {
     'use strict';
 
     var ko = require('knockout');
-    var BlogGrid = (function(){
+    var server = require('server');
 
-        var BlogGrid = function(config){
-        var that = this;
+    var BlogGrid = (function () {
 
-        that.data = config.data;
-        that.currentPageIndex = ko.observable(0);
-        that.pageSize = config.pageSize || 5;
+        var Class = function (config) {
+            var that = this;
 
-        that.itemsOnCurrentPage = ko.computed(function() {
-            var startIndex = that.pageSize * that.currentPageIndex();
-            return that.data.slice(startIndex, startIndex + that.pageSize);
-        }, that);
-    }
+            that.data = config.data;
+            that.currentPageIndex = ko.observable(0);
+            that.pageSize = config.pageSize || 5;
 
-    return BlogGrid;
+            that.itemsOnCurrentPage = ko.computed(function () {
+                var startIndex = that.pageSize * that.currentPageIndex();
+                return that.data.slice(startIndex, startIndex + that.pageSize);
+            }, that);
+        };
 
+        return Class;
     }());
 
-    var articles = /* TODO get from db*/;
+    var articles = ko.observableArray();
 
-    var blogGrid = new BlogGrid({
-        data: articles,
-        pageSize: 2
-    })
-
+    var blogGrid = ko.computed(function () {
+        return new BlogGrid({
+            data: articles(),
+            pageSize: 2
+        });
+    });
 
     return {
-        blogGrid: blogGrid
+        blogGrid: blogGrid,
+        activate: function () {
+            return server.blog.get()
+                .then(function (newData) {
+                    articles(newData);
+                });
+        }
     };
 });

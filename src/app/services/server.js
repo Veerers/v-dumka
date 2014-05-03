@@ -22,6 +22,15 @@ define(function (require) {
                     dataType: 'json'
                 }));
             }
+        },
+        blog: {
+            get: function () {
+                return q($.ajax({
+                    type: 'GET',
+                    url: 'api/blog',
+                    dataType: 'json'
+                }));
+            }
         }
     };
 });
