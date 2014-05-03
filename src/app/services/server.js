@@ -21,6 +21,17 @@ define(function (require) {
                     url: 'api/books?countOnly=true',
                     dataType: 'json'
                 }));
+            },
+            getPart: function (from, count) {
+                return q($.ajax({
+                    type: 'GET',
+                    url: 'api/books',
+                    dataType: 'json',
+                    data: {
+                        from: from,
+                        count: count
+                    }
+                }));
             }
         }
     };

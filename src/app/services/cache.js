@@ -37,7 +37,11 @@ define(function (require) {
                             });
                     }, 0);
                 } else {
-                    updateFromServer();
+                    server.books.getPart(0, 20)
+                        .then(function (newData) {
+                            cached.books(newData);
+                        })
+                        .then(updateFromServer);
                 }
 
             }
