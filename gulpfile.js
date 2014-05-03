@@ -25,7 +25,7 @@
     });
 
     gulp.task('dev:less', ['dev:bower'], function () {
-        gulp.src('src/main.less')
+        return gulp.src('src/main.less')
             .pipe(less())
             .pipe(gulp.dest('src'));
     });
@@ -64,7 +64,7 @@
     // PROD BUILD
 
     gulp.task('prod:durandal', ['dev'], function () {
-        durandal({
+        return durandal({
             verbose: true,
             baseDir: 'src/app',
             main: 'main.js',
@@ -81,21 +81,16 @@
     });
 
     gulp.task('prod:css', ['dev:less', 'dev'], function (done) {
-        setTimeout(function () {
-            gulp.src('src/main.css')
-                .pipe(minifyCss({
-                    processImport: true,
-                    keepSpecialComments: 0
-                }))
-                .pipe(gulp.dest('public'));
-            setTimeout(function () {
-                done();
-            }, 500);
-        }, 1000);
+        return gulp.src('src/main.css')
+            .pipe(minifyCss({
+                processImport: true,
+                keepSpecialComments: 0
+            }))
+            .pipe(gulp.dest('public'));
     });
 
     gulp.task('prod:index', function () {
-        gulp.src('src/index.html')
+        return gulp.src('src/index.html')
             .pipe(preprocess())
             .pipe(gulp.dest('public'));
     });
@@ -129,12 +124,12 @@
     // TOOLS
 
     gulp.task('clean', function () {
-        gulp.src(['public', 'src/libs', 'src/main.css', 'server/config.js'])
+        return gulp.src(['public', 'src/libs', 'src/main.css', 'server/config.js'])
             .pipe(clean());
     });
 
     gulp.task('lint', function () {
-        gulp.src(['src/app/**/*.js', 'server/**/*.js'])
+        return gulp.src(['src/app/**/*.js', 'server/**/*.js'])
             .pipe(jslint());
     });
 
