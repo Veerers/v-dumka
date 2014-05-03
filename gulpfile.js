@@ -74,7 +74,7 @@
             .pipe(gulp.dest('public'));
     });
 
-    gulp.task('prod:resources', function () {
+    gulp.task('prod:resources', ['dev'], function () {
         gulp.src('src/img/**').pipe(gulp.dest('public/img'));
         gulp.src('src/locales/**').pipe(gulp.dest('public/locales'));
         gulp.src('src/libs/bootstrap/fonts/**').pipe(gulp.dest('public/libs/bootstrap/fonts'));
