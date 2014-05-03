@@ -23,16 +23,17 @@ define(function (require) {
     var search = ko.observable();
     var booksFiltered = ko.computed(function () {
         return index().search(search()).slice(0, 20);
-    }).extend({rateLimit: 500});
+    }).extend({
+        rateLimit: 500
+    });
 
     return {
         activate: function () {
-            // search('');
             cache.books.update();
         },
-        binding: function(view){
+        binding: function (view) {
             $('.search-input')
-                .keydown(function(e){
+                .keydown(function (e) {
                     if (e.which === 27) {
                         search('');
                     }
@@ -44,8 +45,8 @@ define(function (require) {
         showAdditional: function (data, e) {
             $(e.target).closest('.book-row').toggleClass('expanded');
         },
-        searchBy: function(text){
-            search('' + text);
+        searchBy: function (text) {
+            search(text.toString());
         }
     };
 });

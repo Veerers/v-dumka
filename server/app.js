@@ -1,9 +1,9 @@
 /*jslint node: true, unparam: true, nomen: true, vars: true*/
 'use strict';
 
-var config = require('./config');
+var isProduction = process.env.NODE_ENV === 'production';
 
-var mongoose = require('mongoose').connect(config.mongodbConnectionString);
+var mongoose = require('mongoose').connect(process.env.VDUMKA_MONGO_CONNECTION_STRING);
 var models = require('./models');
 var books = mongoose.model('books', models.books);
 var blog = mongoose.model('blog', models.blog);
@@ -11,10 +11,10 @@ var blog = mongoose.model('blog', models.blog);
 var express = require('express');
 var app = express();
 
-app.set('port', process.env.PORT || config.defaultPort);
+app.set('port', process.env.PORT || 3000);
 
 app.use(require('body-parser')());
-app.use(express.static(__dirname + '/../src'));
+app.use(express.static(__dirname + (isProduction ? '/../public' : '/../src')));
 app.use(function (req, res, next) {
     req.db = {
         books: books,
