@@ -15,7 +15,7 @@ define(function (require) {
         publisher: 1,
         tags: 3
     };
-    
+
     var books = cache.books.data;
     var index = ko.computed(function () {
         return new Search(searchConfig, books());
@@ -29,13 +29,13 @@ define(function (require) {
 
     var perPage = 10;
     var currentPage = ko.observable(1);
-    search.subscribe(function(){
+    search.subscribe(function () {
         currentPage(1);
     });
-    var totalPages = ko.computed(function(){
+    var totalPages = ko.computed(function () {
         return Math.ceil(booksFiltered().length / perPage);
     });
-    var itemsOnPage = ko.computed(function(){
+    var itemsOnPage = ko.computed(function () {
         return booksFiltered().slice(currentPage() * perPage - perPage, currentPage() * perPage);
     });
 
@@ -51,7 +51,7 @@ define(function (require) {
                     }
                 });
         },
-        
+
         search: search,
         books: itemsOnPage,
         showAdditional: function (data, e) {
@@ -63,15 +63,15 @@ define(function (require) {
         paging: {
             current: currentPage,
             last: totalPages,
-            goTo: function(page){
+            goTo: function (page) {
                 currentPage(+page);
             },
-            next: function(){
-                if (currentPage() < totalPages()){
+            next: function () {
+                if (currentPage() < totalPages()) {
                     currentPage(currentPage() + 1);
                 }
             },
-            prev: function(){
+            prev: function () {
                 if (currentPage() > 1) {
                     currentPage(currentPage() - 1);
                 }
