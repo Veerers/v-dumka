@@ -6,6 +6,7 @@ var isProduction = process.env.NODE_ENV === 'production';
 var mongoose = require('mongoose').connect(process.env.VDUMKA_MONGO_CONNECTION_STRING);
 var models = require('./models');
 var books = mongoose.model('books', models.books);
+var cachestamps = mongoose.model('cachestamps', models.cachestamps);
 
 var express = require('express');
 var app = express();
@@ -16,7 +17,8 @@ app.use(require('body-parser')());
 app.use(express.static(__dirname + (isProduction ? '/../public' : '/../src')));
 app.use(function (req, res, next) {
     req.db = {
-        books: books
+        books: books,
+        cachestamps: cachestamps
     };
     next();
 });

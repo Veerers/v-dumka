@@ -4,10 +4,10 @@
 var router = require('express').Router();
 
 router.get('/', function (req, res) {
-    if (req.query.countOnly) {
-        req.db.books.count(function (err, count) {
+    if (req.query.timestamp) {
+        req.db.cachestamps.findOne({collectionName: 'books'}, function (err, result) {
             res.json({
-                count: count
+                timestamp: result.timestamp
             });
         });
     } else if (req.query.from || req.query.count) {

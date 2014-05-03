@@ -9,3 +9,8 @@ module.exports.books = new Schema({
     review: String,
     tags: [String]
 });
+
+module.exports.cachestamps = new Schema({
+    collectionName: String,
+    timestamp: Number
+});

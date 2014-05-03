@@ -15,10 +15,10 @@ define(function (require) {
                     dataType: 'json'
                 }));
             },
-            count: function () {
+            timestamp: function () {
                 return q($.ajax({
                     type: 'GET',
-                    url: 'api/books?countOnly=true',
+                    url: 'api/books?timestamp=true',
                     dataType: 'json'
                 }));
             },
