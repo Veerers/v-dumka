@@ -80,13 +80,18 @@
         gulp.src('src/libs/bootstrap/fonts/**').pipe(gulp.dest('public/libs/bootstrap/fonts'));
     });
 
-    gulp.task('prod:css', ['dev:less', 'dev'], function () {
-        gulp.src('src/main.css')
-            .pipe(minifyCss({
-                processImport: true,
-                keepSpecialComments: 0
-            }))
-            .pipe(gulp.dest('public'));
+    gulp.task('prod:css', ['dev:less', 'dev'], function (done) {
+        setTimeout(function () {
+            gulp.src('src/main.css')
+                .pipe(minifyCss({
+                    processImport: true,
+                    keepSpecialComments: 0
+                }))
+                .pipe(gulp.dest('public'));
+            setTimeout(function () {
+                done();
+            }, 500);
+        }, 1000);
     });
 
     gulp.task('prod:index', function () {
