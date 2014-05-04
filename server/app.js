@@ -12,8 +12,8 @@ var express = require('express');
 var app = express();
 
 app.set('port', process.env.PORT || 3000);
-
 app.use(require('body-parser')());
+app.use(require('compression')());
 app.use(express.static(__dirname + (isProduction ? '/../public' : '/../src')));
 app.use(function (req, res, next) {
     req.db = {
