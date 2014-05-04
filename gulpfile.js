@@ -104,6 +104,7 @@
     gulp.task('prod:server', ['prod'], function () {
         var server = spawn('node', ['server/app.js']);
         server.stdout.pipe(process.stdout);
+        server.stderr.pipe(process.stdout);
         process.on('exit', function () {
             server.kill();
         });
