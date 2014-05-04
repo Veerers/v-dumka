@@ -1,4 +1,4 @@
-/*jslint nomen: true, vars: true*, unparam: true/
+/*jslint nomen: true, vars: true, unparam: true*/
 /*global requirejs, define*/
 (function () {
     'use strict';
