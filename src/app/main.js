@@ -61,8 +61,9 @@
             };
             return deferred;
         };
-
+        
         var i18NOptions = {
+            lng: i18next.detectLanguage() === 'by' ? 'by' : 'ru',
             useCookie: true,
             preload: ['ru', 'by'],
             fallbackLng: ['ru', 'by'],
