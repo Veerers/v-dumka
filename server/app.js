@@ -16,7 +16,7 @@ app.set('port', process.env.PORT || 3000);
 app.use(require('body-parser')());
 app.use(express.static(__dirname + (isProduction ? '/../public' : '/../src')));
 app.use(function (req, res, next) {
-    req.db = {
+   req.db = {
         books: books,
         blog: blog
     };
