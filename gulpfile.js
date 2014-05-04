@@ -36,6 +36,7 @@
     gulp.task('dev:server', ['dev'], function () {
         var server = spawn('node', ['--debug', 'server/app.js']);
         server.stdout.pipe(process.stdout);
+        server.stderr.pipe(process.stdout);
         process.on('exit', function () {
             server.kill();
         });
@@ -44,6 +45,7 @@
     gulp.task('dev:server-inspector', function () {
         var inpector = spawn('node-inspector', ['--save-live-edit']);
         inpector.stdout.pipe(process.stdout);
+        inpector.stderr.pipe(process.stdout);
         process.on('exit', function () {
             inpector.kill();
         });

@@ -76,7 +76,6 @@
         i18NOptions.useLocalStorage = false;
         i18NOptions.debug = true;
         //@endif
-
         app.start().then(function () {
             i18next.init(i18NOptions, function () {
                 /*jslint unparam: true*/
