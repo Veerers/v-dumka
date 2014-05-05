@@ -3,7 +3,7 @@
 define(function (require) {
     'use strict';
 
-    var server = require('server');
+    var server = require('services/server');
     var ko = require('knockout');
 
     var articles = ko.observableArray();
