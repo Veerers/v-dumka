@@ -6,7 +6,7 @@ var isProduction = process.env.NODE_ENV === 'production';
 var mongoose = require('mongoose').connect(process.env.VDUMKA_MONGO_CONNECTION_STRING);
 var models = require('./models');
 var books = mongoose.model('books', models.books);
-var blog = mongoose.model('blog', models.blog);
+var blog = mongoose.model('blog', models.blog, 'blog');
 
 var express = require('express');
 var app = express();
