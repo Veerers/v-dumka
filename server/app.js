@@ -25,6 +25,7 @@ app.use(function (req, res, next) {
 
 app.use('/api/books', require('./routes/books'));
 app.use('/api/blog', require('./routes/blog'));
+app.use('/api/blog/:id', require('./routes/blog'));
 
 var server = app.listen(app.get('port'), function () {
     console.log('Listening on port %d', server.address().port);

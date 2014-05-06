@@ -31,6 +31,15 @@ define(function (require) {
                     dataType: 'json'
                 }));
             }
+        },
+        article: {
+            get: function () {
+                return q($.ajax({
+                    type: 'GET',
+                    url: 'api/blog/:id',
+                    dataType: 'json'
+                }));
+            }
         }
     };
 });

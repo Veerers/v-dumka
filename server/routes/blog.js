@@ -9,4 +9,10 @@ router.get('/', function (req, res) {
     });
 });
 
+router.get('/:id', function(req, res){
+	req.db.blog.findOne({ 'title' :  req.params.id },function (err, results) {
+        res.json(results);
+    });
+})
+
 module.exports = router;

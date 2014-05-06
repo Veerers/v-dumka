@@ -15,4 +15,4 @@ module.exports.blog = new Schema({
     date: String,
     text: String,
     tags: [String]
-});
+}); 
