@@ -30,13 +30,11 @@ define(function (require) {
                     url: 'api/blog',
                     dataType: 'json'
                 }));
-            }
-        },
-        article: {
-            get: function () {
+            },
+            getArticleByTitle: function(title){
                 return q($.ajax({
                     type: 'GET',
-                    url: 'api/blog/:id',
+                    url: 'api/blog/' + title,
                     dataType: 'json'
                 }));
             }

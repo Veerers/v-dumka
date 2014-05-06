@@ -6,9 +6,10 @@ define(function (require) {
     var ko = require('knockout');
 
     var article = ko.observable();
+    var title = document.URL.substr(document.URL.lastIndexOf("/") + 1);
     return {
         activate: function(){
-            return server.article.get()
+            return server.blog.getArticleByTitle(title)
                 .then(function (newData) {
                     article(newData);
                 });
