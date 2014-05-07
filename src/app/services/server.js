@@ -35,14 +35,14 @@ define(function (require) {
             }
         },
         articles: {
-            get: function () {
-                return q($.ajax({
-                    type: 'GET',
-                    url: 'api/blog',
-                    dataType: 'json'
-                }));
-            },
-            getArticleByTitle: function(title){
+            get: function (title) {
+                if (title === undefined) {
+                    return q($.ajax({
+                        type: 'GET',
+                        url: 'api/blog',
+                        dataType: 'json'
+                    }));
+                }
                 return q($.ajax({
                     type: 'GET',
                     url: 'api/blog/' + title,
