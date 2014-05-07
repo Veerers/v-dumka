@@ -1,1 +1,8 @@
-<div data-bind="text: article().text"></div>
+<div>
+	<h2 data-bind="text: article().title"></h2>
+	<p data-bind="text: article().text"></p>
+	<div data-bind="foreach: article().tags">
+        <p data-bind="text: $data"></p>
+	</div>
+	<p data-bind="text: article().date"></p>
+</div>
