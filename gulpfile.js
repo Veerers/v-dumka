@@ -25,7 +25,7 @@
     });
 
     gulp.task('dev:less', ['dev:bower'], function () {
-        gulp.src('src/main.less')
+        return gulp.src('src/main.less')
             .pipe(less())
             .pipe(gulp.dest('src'));
     });
@@ -36,6 +36,7 @@
     gulp.task('dev:server', ['dev'], function () {
         var server = spawn('node', ['--debug', 'server/app.js']);
         server.stdout.pipe(process.stdout);
+        server.stderr.pipe(process.stdout);
         process.on('exit', function () {
             server.kill();
         });
@@ -44,6 +45,7 @@
     gulp.task('dev:server-inspector', function () {
         var inpector = spawn('node-inspector', ['--save-live-edit']);
         inpector.stdout.pipe(process.stdout);
+        inpector.stderr.pipe(process.stdout);
         process.on('exit', function () {
             inpector.kill();
         });
@@ -64,7 +66,7 @@
     // PROD BUILD
 
     gulp.task('prod:durandal', ['dev'], function () {
-        durandal({
+        return durandal({
             verbose: true,
             baseDir: 'src/app',
             main: 'main.js',
@@ -74,14 +76,14 @@
             .pipe(gulp.dest('public'));
     });
 
-    gulp.task('prod:resources', function () {
+    gulp.task('prod:resources', ['dev'], function () {
         gulp.src('src/img/**').pipe(gulp.dest('public/img'));
         gulp.src('src/locales/**').pipe(gulp.dest('public/locales'));
         gulp.src('src/libs/bootstrap/fonts/**').pipe(gulp.dest('public/libs/bootstrap/fonts'));
     });
 
-    gulp.task('prod:css', ['dev'], function () {
-        gulp.src('src/main.css')
+    gulp.task('prod:css', ['dev:less', 'dev'], function (done) {
+        return gulp.src('src/main.css')
             .pipe(minifyCss({
                 processImport: true,
                 keepSpecialComments: 0
@@ -90,7 +92,7 @@
     });
 
     gulp.task('prod:index', function () {
-        gulp.src('src/index.html')
+        return gulp.src('src/index.html')
             .pipe(preprocess())
             .pipe(gulp.dest('public'));
     });
@@ -102,6 +104,7 @@
     gulp.task('prod:server', ['prod'], function () {
         var server = spawn('node', ['server/app.js']);
         server.stdout.pipe(process.stdout);
+        server.stderr.pipe(process.stdout);
         process.on('exit', function () {
             server.kill();
         });
@@ -124,12 +127,12 @@
     // TOOLS
 
     gulp.task('clean', function () {
-        gulp.src(['public', 'src/libs', 'src/main.css', 'server/config.js'])
+        return gulp.src(['public', 'src/libs', 'src/main.css', 'server/config.js'])
             .pipe(clean());
     });
 
     gulp.task('lint', function () {
-        gulp.src(['src/app/**/*.js', 'server/**/*.js'])
+        return gulp.src(['src/app/**/*.js', 'server/**/*.js'])
             .pipe(jslint());
     });
 

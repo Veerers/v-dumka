@@ -10,7 +10,7 @@ define(function (require) {
 
     return {
         activate: function () {
-            return server.blog.get()
+            return server.articles.get()
                 .then(function (newData) {
                     articles(newData);
                 });

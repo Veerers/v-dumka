@@ -15,15 +15,26 @@ define(function (require) {
                     dataType: 'json'
                 }));
             },
-            count: function () {
+            timestamp: function () {
                 return q($.ajax({
                     type: 'GET',
-                    url: 'api/books?countOnly=true',
+                    url: 'api/books?timestamp=true',
                     dataType: 'json'
+                }));
+            },
+            getPart: function (from, count) {
+                return q($.ajax({
+                    type: 'GET',
+                    url: 'api/books',
+                    dataType: 'json',
+                    data: {
+                        from: from,
+                        count: count
+                    }
                 }));
             }
         },
-        blog: {
+        articles: {
             get: function () {
                 return q($.ajax({
                     type: 'GET',

@@ -1,4 +1,4 @@
-/*jslint nomen: true, vars: true*/
+/*jslint nomen: true, vars: true, unparam: true*/
 /*global requirejs, define*/
 (function () {
     'use strict';
@@ -35,16 +35,15 @@
         // init plugins
         require('bootstrap');
 
-        //@ifdef DEV
+        //>>excludeStart("build", true);
         system.debug(true);
-        //@endif
+        //>>excludeEnd("build");
 
-        //@ifndef DEV
         app.title = 'Вольная Думка';
-        //@endif
-        //@ifdef DEV
+
+        //>>excludeStart("build", true);
         app.title = 'Dev - Вольная Думка';
-        //@endif
+        //>>excludeEnd("build");
 
         app.configurePlugins({
             router: true
@@ -61,6 +60,7 @@
         };
 
         var i18NOptions = {
+            lng: i18next.detectLanguage() === 'by' ? 'by' : 'ru',
             useCookie: true,
             preload: ['ru', 'by'],
             fallbackLng: ['ru', 'by'],
@@ -70,18 +70,16 @@
             lowerCaseLng: true
         };
 
-        //@ifdef DEV
+        //>>excludeStart("build", true);
         i18NOptions.useLocalStorage = false;
         i18NOptions.debug = true;
-        //@endif
+        //>>excludeEnd("build");
 
         app.start().then(function () {
             i18next.init(i18NOptions, function () {
-                /*jslint unparam: true*/
                 binder.binding = function (obj, view) {
                     $(view).i18n();
                 };
-                /*jslint unparam: false*/
 
                 viewLocator.useConvention();
                 app.setRoot('shell', 'entrance', 'application');

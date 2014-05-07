@@ -1,8 +1,8 @@
 // libs
 @import url(libs/lesshat/build/lesshat-prefixed.less);
 @import url(libs/bootstrap/less/bootstrap.less);
-@import url(libs/bootswatch/flatly/bootswatch.less);
-@import url(libs/bootswatch/flatly/variables.less);
+@import url(libs/flatly/bootswatch.less);
+@import url(libs/flatly/variables.less);
 
 @icon-font-path: 'libs/bootstrap/fonts/';
 
@@ -21,3 +21,23 @@
 @import url(app/books/books.less);
 @import url(app/events/events.less);
 @import url(app/home/home.less);
+
+.splash {
+    text-align: center;
+    height: 100%;
+    
+    h1 {
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        position: absolute;
+        margin: auto;
+        height: 100px;
+    }
+}
+
+.fading {
+  .lh-animation(fading 2s infinite ease-in-out alternate);
+}
+.lh-keyframes(~'fading, 0% { opacity: 0; } 100% { opacity: 1; }');

@@ -24,20 +24,26 @@ define(function (require) {
                             return newData;
                         });
                 }
+
+                function sync() {
+                    server.books.timestamp()
+                        .then(function (timestampData) {
+                            if (timestampData.timestamp.toString() !== localStorage.getItem('booksTimestamp')) {
+                                updateFromServer();
+                                localStorage.setItem('booksTimestamp', timestampData.timestamp.toString());
+                            }
+                        });
+                }
+
                 if (!cached.books().length) {
                     cached.books(JSON.parse(localStorage.getItem('books')) || []);
                 }
                 if (!force && cached.books().length) {
-                    setTimeout(function () {
-                        server.books.count()
-                            .then(function (countData) {
-                                if (countData.count !== cached.books().length) {
-                                    updateFromServer();
-                                }
-                            });
-                    }, 0);
+                    sync();
                 } else {
-                    updateFromServer();
+                    server.books.getPart(0, 20)
+                        .then(cached.books)
+                        .then(sync);
                 }
 
             }

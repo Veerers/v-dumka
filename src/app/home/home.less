@@ -192,6 +192,46 @@
             }
         }
     }
+    .location {
+        max-width: @screen-lg;
+        margin: @padding-large-vertical * 2 auto;
+        
+        address {
+            text-align: center;
+            font-size: @font-size-h3;
+        }
+        .map-container {
+            display: block;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            color: fade(@brand-primary, 10%);
+            .lh-transition(color @transition-duration);
+
+            &:hover {
+                color: inherit;
+            }
+            
+            img {
+                .lh-box-shadow(1px 1px 1px 0px rgba(50, 50, 50, 0.3));
+                width: 100%;
+            }
+            .zoom {
+                @size: 72px;
+                .glyphicon;
+                .glyphicon-zoom-in;
+                position: absolute;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                right: 0;
+                margin: auto;
+                height: @size;
+                width: @size;
+                font-size: @size;
+            }
+        }
+    }
     .footer {
         .clearfix();
         max-width: @screen-lg;
@@ -221,10 +261,10 @@
             float: left;
 
             .map {
+                
                 img {
                     width: 100px;
                     height: 80px;
-
                 }
             }
             .address {

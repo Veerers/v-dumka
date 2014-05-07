@@ -4,13 +4,13 @@
 var router = require('express').Router();
 
 router.get('/', function (req, res) {
-    req.db.blog.find(function (err, results) {
+    req.db.articles.find(function (err, results) {
         res.json(results);
     });
 });
 
 router.get('/:id', function(req, res){
-	req.db.blog.findOne({ 'title' :  req.params.id },function (err, results) {
+	req.db.articles.findOne({ 'title' :  req.params.id },function (err, results) {
         res.json(results);
     });
 })
