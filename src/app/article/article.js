@@ -8,7 +8,7 @@ define(function (require) {
     var article = ko.observable();
     return {
         activate: function(title){
-            return server.articles.getArticleByTitle(title)
+            return server.articles.get(title)
                 .then(function (newData) {
                     article(newData);
                 });
