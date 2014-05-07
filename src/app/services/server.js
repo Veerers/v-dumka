@@ -33,6 +33,22 @@ define(function (require) {
                     }
                 }));
             }
+        },
+        articles: {
+            get: function (title) {
+                if (title === undefined) {
+                    return q($.ajax({
+                        type: 'GET',
+                        url: 'api/blog',
+                        dataType: 'json'
+                    }));
+                }
+                return q($.ajax({
+                    type: 'GET',
+                    url: 'api/blog/' + title,
+                    dataType: 'json'
+                }));
+            }
         }
     };
 });

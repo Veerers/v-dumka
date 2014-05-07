@@ -16,9 +16,7 @@
             'moment': '../libs/moment/moment',
             'numeral': '../libs/numeral/numeral',
             'q': '../libs/q/q',
-            'text': '../libs/requirejs-text/text',
-
-            'server': 'services/server'
+            'text': '../libs/requirejs-text/text'
         },
         shim: {
             'bootstrap': ['jquery']

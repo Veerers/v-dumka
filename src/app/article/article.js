@@ -2,19 +2,17 @@
 /*global define*/
 define(function (require) {
     'use strict';
-
     var server = require('services/server');
     var ko = require('knockout');
 
-    var articles = ko.observableArray();
-
+    var article = ko.observable();
     return {
-        activate: function () {
-            return server.articles.get()
+        activate: function(title){
+            return server.articles.get(title)
                 .then(function (newData) {
-                    articles(newData);
+                    article(newData);
                 });
         },
-        articles: articles
+        article: article
     };
 });
