@@ -9,10 +9,12 @@ router.get('/', function (req, res) {
     });
 });
 
-router.get('/:id', function(req, res){
-	req.db.articles.findOne({ 'title' :  req.params.id },function (err, results) {
+router.get('/:id', function (req, res) {
+    req.db.articles.findOne({
+        title: req.params.id
+    }, function (err, results) {
         res.json(results);
     });
-})
+});
 
 module.exports = router;
