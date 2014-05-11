@@ -1,0 +1,56 @@
+.home-container
+    .top-block
+        h1(data-i18n='application-name')
+        h2(data-i18n='main-words')
+        .top-explanation(data-i18n='top-explanation')
+    .detailes-block
+        .explanations
+            .explanation
+                h3(data-i18n='alternative')
+                .explanation-text(data-i18n='alternative-explanation')
+            .explanation
+                h3(data-i18n='educational')
+                .explanation-text(data-i18n='educational-explanation')
+            .explanation
+                h3(data-i18n='initiative')
+                .explanation-text(data-i18n='initiative-explanation')
+    .principles-carousel
+        .carousel-wrapper
+            ul.carousel(data-bind='style: { left: -100 * carousel.current() + "%" }')
+                li
+                    h3(data-i18n='volunteering')
+                    p(data-i18n='volunteering-explanation')
+                    .img.volunteering-img
+                li
+                    h3(data-i18n='independence')
+                    p(data-i18n='independence-explanation')
+                    .img.independence-img
+                li
+                    h3(data-i18n='antiauthoritarian')
+                    p(data-i18n='antiauthoritarian-explanation')
+                li
+                    h3(data-i18n='solidarity')
+                    p(data-i18n='solidarity-explanation')
+                li
+                    h3(data-i18n='patency')
+                    p(data-i18n='patency-explanation')
+            a.arrow.left(href='#', data-bind='click: carousel.goLeft')
+            a.arrow.right(href='#', data-bind='click: carousel.goRight')
+            ol.carousel-pagination(data-bind='foreach: [0,1,2,3,4]')
+                li(data-bind='css: { "active": $parent.carousel.current() === $data }, click: $parent.carousel.goTo.bind(null, $data)')
+    .location
+        address Машерова 9-109, офис партии "Зеленые"
+        a.map-container(href='https://mapsengine.google.com/map/edit?mid=z_9zc_NRpv9E.kfc1_ygpR-cE', target='_blank')
+            img(src='img/map.png')
+            .zoom
+    .footer
+        .menu
+            ul
+                li
+                    a(href='#/', data-i18n='home')
+                li
+                    a(href='#/books', data-i18n='books')
+                li
+                    a(href='#/blog', data-i18n='blog')
+                li
+                    a(href='#/events', data-i18n='events')

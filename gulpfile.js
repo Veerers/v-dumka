@@ -11,11 +11,19 @@
     var bower = require('bower');
     var minifyCss = require('gulp-minify-css');
     var jslint = require('gulp-jslint');
+    var jade = require('gulp-jade');
 
     bower.config.directory = 'libs';
     bower.config.cwd += '/src';
 
     // DEV BUILD
+    gulp.task('dev:jade', function () {
+        return gulp.src('src/app/**/*.jade')
+            .pipe(jade({
+                pretty: true
+            }))
+            .pipe(gulp.dest('src/app'));
+    });
 
     gulp.task('dev:bower', function (next) {
         bower.commands.install([], {}).on('end', function (data) {

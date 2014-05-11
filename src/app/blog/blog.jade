@@ -1,0 +1,6 @@
+div(data-bind='foreach: articles')
+    a(data-bind='attr: {href: "#/blog/" + title}')
+        div(data-bind='text: title')
+    div(data-bind='text: date')
+    div(data-bind='foreach: tags')
+        p(data-bind='text: $data')

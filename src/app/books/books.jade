@@ -1,0 +1,27 @@
+.books-container
+    .search-bar
+        input.search-input(type='text', data-i18n='[placeholder]search-placeholder', data-bind='value: search, valueUpdate: "input"')
+        i.search-icon
+        a.clear-icon(href='#', title='[Esc]', data-bind='visible: search, click: search.bind(null, "")')
+    ul.books-list(data-bind='foreach: books')
+        li.book-row
+            .main-info-row
+                span.books-title(data-bind='text: title')
+                a.books-author(href='#', data-bind='text: author, click: $parent.searchBy.bind(null, $data.author)')
+                a.show-more-btn(href='#', data-bind='click: $parent.showAdditional')
+                a.books-year(href='#', data-bind='text: year, click: $parent.searchBy.bind(null, $data.year)')
+            .additional-info-row
+                .tags-container
+                    .tags-label(data-i18n='categories')
+                    ul.tags-list(href='#', data-bind='foreach: tags')
+                        li.book-tag
+                            a.tag-link(href='#', data-bind='text: $data, click: $parents[1].searchBy.bind(null, $data)')
+                .book-publisher
+                    .publisher-label(data-i18n='publisher')
+                    a.publisher(href='#', data-bind='text: publisher, click: $parent.searchBy.bind(null, $data.publisher)')
+    ul.books-paging
+        li.first-page(data-bind='click: paging.goTo.bind(null, 1)') 1
+        li.prev-page(data-bind='style: {visibility: paging.current() > 1 ? "visible" : "hidden"}, click: paging.prev')
+        li.current-page(data-bind='text: paging.current')
+        li.next-page(data-bind='style: {visibility: paging.current() < paging.last() ? "visible" : "hidden"}, click: paging.next')
+        li.last-page(data-bind='text: paging.last, click: paging.goTo.bind(null, $data.paging.last())')
