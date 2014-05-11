@@ -11,11 +11,20 @@
     var bower = require('bower');
     var minifyCss = require('gulp-minify-css');
     var jslint = require('gulp-jslint');
+    var jade = require('gulp-jade');
 
     bower.config.directory = 'libs';
     bower.config.cwd += '/src';
 
     // DEV BUILD
+
+    gulp.task('dev:jade', function () {
+        return gulp.src('src/app/**/*.jade')
+            .pipe(jade({
+                pretty: true
+            }))
+            .pipe(gulp.dest('src/app'));
+    });
 
     gulp.task('dev:bower', function (next) {
         bower.commands.install([], {}).on('end', function (data) {
@@ -30,10 +39,11 @@
             .pipe(gulp.dest('src'));
     });
 
-    gulp.task('dev', ['dev:bower', 'dev:less']);
+    gulp.task('dev', ['dev:jade', 'dev:bower', 'dev:less']);
 
     // RUN DEV
-    gulp.task('dev:server', ['dev'], function () {
+
+    gulp.task('dev:server', function () {
         var server = spawn('node', ['--debug', 'server/app.js']);
         server.stdout.pipe(process.stdout);
         server.stderr.pipe(process.stdout);
@@ -52,8 +62,10 @@
     });
 
     gulp.task('dev:watch', ['dev', 'dev:server', 'dev:server-inspector'], function () {
+        gulp.watch('src/app/**/*.jade', ['dev:jade']);
         gulp.watch('src/bower.json', ['dev:bower']);
         gulp.watch(['src/main.less', 'src/app/**/*.less'], ['dev:less']);
+        gulp.watch(['src/app/**/*.js', 'server/**/*.js'], ['lint']);
 
         var server = livereload();
         gulp.watch(['src/**/*.js', 'src/**/*.html'])
@@ -65,7 +77,13 @@
 
     // PROD BUILD
 
-    gulp.task('prod:durandal', ['dev'], function () {
+    gulp.task('prod:jade', ['dev:jade'], function () {
+        return gulp.src('src/app/**/*.jade')
+            .pipe(jade())
+            .pipe(gulp.dest('src/app'));
+    });
+
+    gulp.task('prod:durandal', ['dev', 'prod:jade'], function () {
         return durandal({
             verbose: true,
             baseDir: 'src/app',
@@ -101,7 +119,7 @@
 
     // RUN PROD
 
-    gulp.task('prod:server', ['prod'], function () {
+    gulp.task('prod:server', function () {
         var server = spawn('node', ['server/app.js']);
         server.stdout.pipe(process.stdout);
         server.stderr.pipe(process.stdout);
@@ -111,10 +129,11 @@
     });
 
     gulp.task('prod:watch', ['prod', 'prod:server'], function () {
-        gulp.watch(['src/app/**/*.js', 'src/app/**/*.html'], ['prod:durandal']);
+        gulp.watch(['src/app/**/*.js', 'src/app/**/*.jade'], ['prod:durandal']);
         gulp.watch(['src/img/**', 'src/locales/**'], ['prod:resources']);
         gulp.watch('src/main.css', ['prod:css']);
         gulp.watch('src/index.html', ['prod:index']);
+        gulp.watch(['src/app/**/*.js', 'server/**/*.js'], ['lint']);
 
         var server = livereload();
         gulp.watch('public/**')
@@ -127,13 +146,15 @@
     // TOOLS
 
     gulp.task('clean', function () {
-        return gulp.src(['public', 'src/libs', 'src/main.css', 'server/config.js'])
+        return gulp.src(['public', 'src/libs', 'src/main.css', 'src/app/**/*.html'])
             .pipe(clean());
     });
 
     gulp.task('lint', function () {
         return gulp.src(['src/app/**/*.js', 'server/**/*.js'])
-            .pipe(jslint());
+            .pipe(jslint({
+                errorsOnly: true
+            }));
     });
 
     gulp.task('heroku:development', ['dev']);

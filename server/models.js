@@ -15,7 +15,7 @@ module.exports.article = new Schema({
     date: String,
     text: String,
     tags: [String]
-}); 
+});
 
 module.exports.cachestamps = new Schema({
     collectionName: String,

@@ -1,9 +1,0 @@
-<div data-bind="foreach: articles">
-    <a data-bind="attr: {href: '#/blog/' + title}">
-        <div data-bind="text: title"></div>
-    </a>
-    <div data-bind="text: date"></div>
-    <div data-bind="foreach: tags">
-    	<p data-bind="text: $data"></p>
-    </div>
-</div>
