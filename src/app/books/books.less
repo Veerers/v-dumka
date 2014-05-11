@@ -8,12 +8,10 @@
         .lh-transition(opacity @transition-duration-quick);
         .lh-opacity(.8);
     }
-    
     a:hover {
         text-decoration: none;
         .lh-opacity(1);
     }
-
     .search-bar {
         margin: 0 auto @padding-large-vertical;
         width: 10 / 12 * 100%;
@@ -44,6 +42,80 @@
             right: 0;
             display: block;
             font-size: @font-size-large;
+        }
+    }
+    .search-tabs {
+        margin: 0 auto;
+        width: 10 / 12 * 100%;
+        max-width: @screen-sm;
+        text-align: center;
+        height: @input-height-base;
+        .clearfix();
+
+        .book-type-switch {
+            padding: 0 15px;
+            list-style: none;
+            float: left;
+            height: @input-height-base;
+            margin: 0;
+
+            li {
+                width: @input-height-base;
+                float: left;
+                height: @input-height-base;
+                border-radius: 6px 6px 0 0;
+                padding-top: 12px;
+
+                a {
+                    color: @gray;
+                }
+                &.active {
+                    background: #fff;
+                    .lh-box-shadow(1px 0 0 0px rgba(50, 50, 50, 0.1));
+
+                    a {
+                        color: @brand-success;
+                    }
+                }
+            }
+            .paper a {
+                .glyphicon;
+                .glyphicon-book;
+            }
+            .ebook a {
+                .glyphicon;
+                .glyphicon-phone;
+            }
+        }
+        .filters {
+            list-style: none;
+            float: right;
+            padding: 0;
+            margin: 0;
+
+            li {
+                width: @input-height-base;
+                float: right;
+                height: @input-height-base;
+                border-radius: 6px 6px 0 0;
+                padding-top: 12px;
+
+                a {
+                    color: @gray;
+                }
+                &.active {
+                    background: #fff;
+                    .lh-box-shadow(1px 0 0 0px rgba(50, 50, 50, 0.1));
+
+                    a {
+                        color: @brand-success;
+                    }
+                }
+            }
+            .availableOnly a {
+                .glyphicon;
+                .glyphicon-record;
+            }
         }
     }
     .books-list {

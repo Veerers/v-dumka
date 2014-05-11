@@ -3,6 +3,15 @@
         input.search-input(type='text', data-i18n='[placeholder]search-placeholder', data-bind='value: search, valueUpdate: "input"')
         i.search-icon
         a.clear-icon(href='#', title='[Esc]', data-bind='visible: search, click: search.bind(null, "")')
+    .search-tabs
+        ul.book-type-switch
+            li.paper.active(data-toggle="tooltip" data-original-title="Бумажные")
+                a(href='#')
+            li.ebook(data-toggle="tooltip" data-original-title="Электронные")
+                a(href='#')
+        ul.filters
+            li.availableOnly(data-toggle="tooltip" data-original-title="Только доступные")
+                a(href='#')
     ul.books-list(data-bind='foreach: books')
         li.book-row
             .main-info-row

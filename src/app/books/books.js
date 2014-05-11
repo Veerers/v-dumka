@@ -44,7 +44,9 @@ define(function (require) {
             cache.books.update();
         },
         binding: function (view) {
-            $('.search-input')
+            $(view).find('.book-type-switch > li, .filters > li')
+                .tooltip();
+            $(view).find('.search-input')
                 .keydown(function (e) {
                     if (e.which === 27) {
                         search('');
