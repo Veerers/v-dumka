@@ -5,12 +5,12 @@
         a.clear-icon(href='#', title='[Esc]', data-bind='visible: search, click: search.bind(null, "")')
     .search-tabs
         ul.book-type-switch
-            li.paper.active(data-toggle="tooltip" data-original-title="Бумажные")
+            li.paper(data-toggle="tooltip" data-original-title="Бумажные" data-bind="css: {active: !isEbook()}, click: isEbook.bind(null, false)")
                 a(href='#')
-            li.ebook(data-toggle="tooltip" data-original-title="Электронные")
+            li.ebook(data-toggle="tooltip" data-original-title="Электронные" data-bind="css: {active: isEbook}, click: isEbook.bind(null, true)")
                 a(href='#')
         ul.filters
-            li.availableOnly(data-toggle="tooltip" data-original-title="Только доступные")
+            li.availableOnly(data-toggle="tooltip" data-original-title="Только доступные" data-bind="visible: !isEbook(), css: {active: isAvailableOnly}, click: function(){isAvailableOnly(!isAvailableOnly());}")
                 a(href='#')
     ul.books-list(data-bind='foreach: books')
         li.book-row

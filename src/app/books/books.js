@@ -7,6 +7,7 @@ define(function (require) {
     var ko = require('knockout');
     var Search = require('services/search');
     var $ = require('jquery');
+    var _ = require('lodash');
 
     var searchConfig = {
         title: 4,
@@ -20,9 +21,25 @@ define(function (require) {
     var index = ko.computed(function () {
         return new Search(searchConfig, books());
     });
+    var isEbook = ko.observable(false);
+    var isAvailableOnly = ko.observable(false);
+    var filter = ko.computed(function () {
+        isEbook();
+        isAvailableOnly();
+        return function (item, index, collection) {
+            if (isEbook()) {
+                return item.ebook;
+            }
+            if (isAvailableOnly()) {
+                return !item.ebook && item.available;
+            }
+            return !item.ebook;
+        };
+    });
+
     var search = ko.observable();
     var booksFiltered = ko.computed(function () {
-        return index().search(search());
+        return _.filter(index().search(search()), filter());
     }).extend({
         rateLimit: 100
     });
@@ -78,6 +95,8 @@ define(function (require) {
                     currentPage(currentPage() - 1);
                 }
             }
-        }
+        },
+        isEbook: isEbook,
+        isAvailableOnly: isAvailableOnly
     };
 });
