@@ -119,7 +119,8 @@
     }
     .books-list {
         @row-height: 70px;
-        @row-height-expanded: @row-height + 200px;
+        @max-additional-height: 200px;
+        @row-height-expanded: @row-height + @max-additional-height;
         list-style: none;
         padding: 0;
         width: 10 / 12 * 100%;
