@@ -12,7 +12,7 @@ var cachestamps = mongoose.model('cachestamps', models.cachestamps);
 var express = require('express');
 var app = express();
 
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.VDUMKA_PORT || process.env.PORT || 3000);
 app.use(require('body-parser')());
 app.use(require('compression')());
 app.use(express.static(__dirname + (isProduction ? '/../public' : '/../src')));

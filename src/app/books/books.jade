@@ -16,9 +16,9 @@
         li.book-row
             .main-info-row
                 span.books-title(data-bind='text: title')
-                a.books-author(href='#', data-bind='text: author, click: $parent.searchBy.bind(null, $data.author)')
+                a.books-author(href='#', data-bind='text: "author" in $data ? author : "", click: $parent.searchBy.bind(null, $data.author)')
                 a.show-more-btn(href='#', data-bind='click: $parent.showAdditional')
-                a.books-year(href='#', data-bind='text: year, click: $parent.searchBy.bind(null, $data.year)')
+                a.books-year(href='#', data-bind='text: "year" in $data ? year : "", click: $parent.searchBy.bind(null, $data.year)')
             .additional-info-row
                 .tags-container
                     .tags-label(data-i18n='categories')
@@ -27,7 +27,7 @@
                             a.tag-link(href='#', data-bind='text: $data, click: $parents[1].searchBy.bind(null, $data)')
                 .book-publisher
                     .publisher-label(data-i18n='publisher')
-                    a.publisher(href='#', data-bind='text: publisher, click: $parent.searchBy.bind(null, $data.publisher)')
+                    a.publisher(href='#', data-bind='text: "publisher" in $data ? publisher : "", click: $parent.searchBy.bind(null, $data.publisher)')
     ul.books-paging
         li.first-page(data-bind='click: paging.goTo.bind(null, 1)') 1
         li.prev-page(data-bind='style: {visibility: paging.current() > 1 ? "visible" : "hidden"}, click: paging.prev')
