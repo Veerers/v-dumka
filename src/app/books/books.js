@@ -23,10 +23,9 @@ define(function (require) {
     });
     var isEbook = ko.observable(false);
     var isAvailableOnly = ko.observable(false);
-    var filter = ko.computed(function () {
-        isEbook();
-        isAvailableOnly();
-        return function (item, index, collection) {
+    var search = ko.observable();
+    var booksFiltered = ko.computed(function () {
+        return _.filter(index().search(search()), function (item, index, collection) {
             if (isEbook()) {
                 return item.ebook;
             }
@@ -34,12 +33,7 @@ define(function (require) {
                 return !item.ebook && item.available;
             }
             return !item.ebook;
-        };
-    });
-
-    var search = ko.observable();
-    var booksFiltered = ko.computed(function () {
-        return _.filter(index().search(search()), filter());
+        });
     }).extend({
         rateLimit: 100
     });
