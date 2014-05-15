@@ -1,4 +1,4 @@
-/*jslint nomen: true, vars: true, unparam: true*/
+/*jslint browser: true, nomen: true, vars: true, unparam: true*/
 /*global define*/
 define(function (require) {
     'use strict';
@@ -55,14 +55,16 @@ define(function (require) {
             cache.books.update();
         },
         binding: function (view) {
-            $(view).find('.book-type-switch > li, .filters > li')
-                .tooltip();
-            $(view).find('.search-input')
-                .keydown(function (e) {
-                    if (e.which === 27) {
-                        search('');
-                    }
-                });
+            setTimeout(function () {
+                $(view).find('[data-toggle="tooltip"]')
+                    .tooltip();
+                $(view).find('.search-input')
+                    .keydown(function (e) {
+                        if (e.which === 27) {
+                            search('');
+                        }
+                    });
+            }, 0);
         },
 
         search: search,
