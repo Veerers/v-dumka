@@ -12,6 +12,11 @@
         ul.filters
             li.availableOnly(data-toggle="tooltip" data-original-title="Только доступные" data-bind="visible: !isEbook(), css: {active: isAvailableOnly}, click: function(){isAvailableOnly(!isAvailableOnly());}")
                 a(href='#')
+    // ko ifnot: books().length
+    ul.books-list
+        li.empty-splash(data-i18n="no-results")
+    // /ko
+    // ko if: books().length
     ul.books-list(data-bind='foreach: books')
         li.book-row
             .main-info-row
@@ -28,6 +33,7 @@
                 .book-publisher
                     .publisher-label(data-i18n='publisher')
                     a.publisher(href='#', data-bind='text: "publisher" in $data ? publisher : "", click: $parent.searchBy.bind(null, $data.publisher)')
+    // /ko
     ul.books-paging
         li.first-page(data-bind='click: paging.goTo.bind(null, 1)') 1
         li.prev-page(data-bind='style: {visibility: paging.current() > 1 ? "visible" : "hidden"}, click: paging.prev')
