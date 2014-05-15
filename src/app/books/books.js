@@ -1,4 +1,4 @@
-/*jslint nomen: true, vars: true, unparam: true*/
+/*jslint browser: true, nomen: true, vars: true, unparam: true*/
 /*global define*/
 define(function (require) {
     'use strict';
@@ -7,6 +7,7 @@ define(function (require) {
     var ko = require('knockout');
     var Search = require('services/search');
     var $ = require('jquery');
+    var _ = require('lodash');
 
     var searchConfig = {
         title: 4,
@@ -20,9 +21,19 @@ define(function (require) {
     var index = ko.computed(function () {
         return new Search(searchConfig, books());
     });
+    var isEbook = ko.observable(false);
+    var isAvailableOnly = ko.observable(false);
     var search = ko.observable();
     var booksFiltered = ko.computed(function () {
-        return index().search(search());
+        return _.filter(index().search(search()), function (item, index, collection) {
+            if (isEbook()) {
+                return item.ebook;
+            }
+            if (isAvailableOnly()) {
+                return !item.ebook && item.available;
+            }
+            return !item.ebook;
+        });
     }).extend({
         rateLimit: 100
     });
@@ -44,12 +55,16 @@ define(function (require) {
             cache.books.update();
         },
         binding: function (view) {
-            $('.search-input')
-                .keydown(function (e) {
-                    if (e.which === 27) {
-                        search('');
-                    }
-                });
+            setTimeout(function () {
+                $(view).find('[data-toggle="tooltip"]')
+                    .tooltip();
+                $(view).find('.search-input')
+                    .keydown(function (e) {
+                        if (e.which === 27) {
+                            search('');
+                        }
+                    });
+            }, 0);
         },
 
         search: search,
@@ -76,6 +91,8 @@ define(function (require) {
                     currentPage(currentPage() - 1);
                 }
             }
-        }
+        },
+        isEbook: isEbook,
+        isAvailableOnly: isAvailableOnly
     };
 });
