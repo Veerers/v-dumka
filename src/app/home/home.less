@@ -54,7 +54,6 @@
                     width: 100%;
                     text-align: left;
                     border-left: none;
-                    border-bottom: 1px solid @brand-primary;
                     float: none;
                 }
                 float: left;
@@ -233,43 +232,51 @@
         }
     }
     .footer {
-        .clearfix();
         max-width: @screen-lg;
         margin: 0 auto;
         padding: @padding-large-vertical @padding-large-horizontal;
+        position: relative;
+        font-size: @font-size-small;
 
+        &:before {
+            .lh-background-image(linear-gradient(to right, fade(@gray, 0%) 0%, @gray 15%, @gray 85%, fade(@gray, 0%) 100%));
+
+            content: '';
+            position: absolute;
+            height: 1px;
+            right: 0;
+            left: 0;
+        }
         .menu {
-            width: 100% * (6 / 12);
-            float: left;
+            padding: @padding-large-vertical 0;
+            list-style: none;
+            float: right;
+            width: 5 / 12 * 100%;
+            .clearfix();
 
-            ul {
-                width: 100% * (6 / 12);
-                padding: 0;
+            li {
+                float: right;
+                width: 60px;
+                text-align: center;
 
-                list-style: none;
+                a {
 
-                li {
-
-                    a {
-
-                    }
                 }
             }
         }
-        .place {
-            width: 100% * (6 / 12);
-            float: left;
+        .footer-logo {
+            padding: @padding-large-vertical 0;
+            width: 2 / 12 * 100%;
 
-            .map {
-                
-                img {
-                    width: 100px;
-                    height: 80px;
-                }
-            }
-            .address {
-                
-            }
+            float: left;
+            .lh-invert(50%);
+            text-align: center;
+        }
+        .links {
+            padding: @padding-large-vertical 0;
+            list-style: none;
+            float: left;
+            width: 5 / 12 * 100%;
         }
     }
 }
