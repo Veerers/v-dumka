@@ -19,5 +19,5 @@ module.exports.article = new Schema({
 
 module.exports.cachestamps = new Schema({
     collectionName: String,
-    timestamp: Number
+    timestamp: Date
 });

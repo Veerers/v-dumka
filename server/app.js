@@ -7,7 +7,7 @@ var mongoose = require('mongoose').connect(process.env.VDUMKA_MONGO_CONNECTION_S
 var models = require('./models');
 var books = mongoose.model('book', models.book, 'books');
 var articles = mongoose.model('article', models.article, 'articles');
-var cachestamps = mongoose.model('cachestamps', models.cachestamps);
+var cachestamps = mongoose.model('cachestamp', models.cachestamps, 'cachestamps');
 
 var express = require('express');
 var app = express();
