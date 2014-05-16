@@ -1,6 +1,6 @@
-div
-    h2(data-bind='text: article().title')
+.article-container
+    h1.title(data-bind='text: article().title')
+    ul.tags(data-bind='foreach: article().tags')
+        li.p(data-bind='text: $data')
     p(data-bind='text: article().text')
-    div(data-bind='foreach: article().tags')
-        p(data-bind='text: $data')
     p(data-bind='text: article().date')

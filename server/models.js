@@ -14,6 +14,7 @@ module.exports.article = new Schema({
     title: String,
     date: String,
     text: String,
+    description: String,
     tags: [String]
 });
 
