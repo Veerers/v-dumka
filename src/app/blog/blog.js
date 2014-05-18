@@ -8,6 +8,16 @@ define(function (require) {
 
     var articles = ko.observableArray();
 
+    var perPage = 5;
+    var currentPage = ko.observable(1);
+    var totalPages = ko.computed(function(){
+        return Math.ceil(articles().length / perPage);
+    });
+
+    var itemsOnPage = ko.computed(function () {
+        return articles().slice(currentPage() * perPage - perPage, currentPage() * perPage);
+    });
+
     return {
         activate: function () {
             return server.articles.get()
@@ -15,6 +25,23 @@ define(function (require) {
                     articles(newData);
                 });
         },
-        articles: articles
+        articles: itemsOnPage,
+        paging: {
+            current: currentPage,
+            last: totalPages,
+            goTo: function (page) {
+                currentPage(+page);
+            },
+            next: function () {
+                if (currentPage() < totalPages()) {
+                    currentPage(currentPage() + 1);
+                }
+            },
+            prev: function () {
+                if (currentPage() > 1) {
+                    currentPage(currentPage() - 1);
+                }
+            }
+        }
     };
 });

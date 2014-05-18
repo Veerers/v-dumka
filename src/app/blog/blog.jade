@@ -5,5 +5,13 @@
                 a(data-bind='attr: {href: "#/blog/" + title}')
                     span.article-title(data-bind='text: title')
                 div.article-description(data-bind='text: description')
+            .additional-info-row
                 div.article-date(data-bind='text: date')
+    ul.articles-paging
+        li.first-page(data-bind='click: paging.goTo.bind(null, 1)') 1
+        li.prev-page(data-bind='style: {visibility: paging.current() > 1 ? "visible" : "hidden"}, click: paging.prev')
+        li.current-page(data-bind='text: paging.current')
+        li.next-page(data-bind='style: {visibility: paging.current() < paging.last() ? "visible" : "hidden"}, click: paging.next')
+        li.last-page(data-bind='text: paging.last, click: paging.goTo.bind(null, $data.paging.last())')
+
                 
