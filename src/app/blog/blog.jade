@@ -1,11 +1,9 @@
 .blog-container
-	ul.articles-list(data-bind='foreach: articles')
-		li.article-row
-			.main-info-row
-				a(data-bind='attr: {href: "#/blog/" + title}')
-					div(data-bind='text: title')
-			.additional-info-row
-				div(data-bind='text: description')
-				div(data-bind='text: date')
-				div(data-bind='foreach: tags')
-					p(data-bind='text: $data')
+    ul.articles-list(data-bind='foreach: articles')
+        li.article-row
+            .main-info-row
+                a(data-bind='attr: {href: "#/blog/" + title}')
+                    span.article-title(data-bind='text: title')
+                div.article-description(data-bind='text: description')
+                div.article-date(data-bind='text: date')
+                
