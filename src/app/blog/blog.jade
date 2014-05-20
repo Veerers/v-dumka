@@ -5,6 +5,8 @@
                 a(data-bind='attr: {href: "#/blog/" + title}')
                     h3.article-title(data-bind='text: title')
                 div.article-description(data-bind='text: description')
+                a(data-bind='attr: {href: "#/blog/" + title}')
+                    p.read-more(data-i18n='read-more')
             .additional-info-row
                 div.article-date(data-bind='text: date')
     ul.articles-paging
