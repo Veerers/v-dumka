@@ -8,6 +8,9 @@
                 a(data-bind='attr: {href: "#/blog/" + title}')
                     p.read-more(data-i18n='read-more')
             .additional-info-row
+                ul.tags-list(href='#', data-bind='foreach: tags')
+                        li.article-tag
+                            a.tag-link(data-bind='text: $data')
                 div.article-date(data-bind='text: date')
     ul.articles-paging
         li.first-page(data-bind='click: paging.goTo.bind(null, 1)') 1
