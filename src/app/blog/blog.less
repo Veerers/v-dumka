@@ -22,12 +22,14 @@
         .lh-border-radius(@border-radius-large);
         .lh-box-shadow(1px 1px 1px 0px rgba(50, 50, 50, 0.1));
 
-
+        .article-row:last-child{
+            border-bottom: none;
+        }
 
     	.article-row {
             overflow: hidden;
             .lh-transition(max-height @transition-duration-long);
-            border-bottom: 1px solid @gray-lighter;
+            border-bottom: @border-radius-base solid @gray-dark;
             margin: 0 @padding-base-horizontal;
             padding-top: @padding-large-vertical;
 
@@ -37,7 +39,6 @@
       				display: block;
                     text-align: left;
                     padding-left: @padding-base-horizontal;
-                    font-size: @font-size-large;
                     width: 6 / 12 * 100%;
                     margin-top: @font-size-base - @font-size-large;
       			}
