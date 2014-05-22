@@ -1,18 +1,31 @@
 .article-container {
-	text-align: center;
+    text-align: center;
     background-color: @gray-lighter;
     margin: 0;
     padding: @padding-large-vertical 0;
 
     .title{
-    	
+        color: @gray-darker;
+        
     }
 
-    .tags{
-    	list-style-type: none;
+    .tags-list{
+        list-style: none;
+        padding-left: @padding-base-horizontal;
+        float: left;
+        .article-tag{
+            display: inline;
+            .tag-link{
+                color: @gray-dark;
+            }
+        }
+    }
 
-    	li{
-    		display: inline;
-    	}
+    .article-date{
+                    text-align: right;
+                    color: @gray-dark;
+    }
+
+    .article-text{
     }
 }

@@ -6,23 +6,18 @@ define(function (require) {
     var server = require('services/server');
     var ko = require('knockout');
 
-    var articles = ko.observableArray();
-
     var perPage = 5;
     var currentPage = ko.observable(1);
-    var totalPages = ko.computed(function(){
-        return Math.ceil(articles().length / perPage);
-    });
+    var totalPages = ko.observable();
 
-    var itemsOnPage = ko.computed(function () {
-        return articles().slice(currentPage() * perPage - perPage, currentPage() * perPage);
-    });
+    var itemsOnPage = ko.observableArray();
 
     return {
         activate: function () {
-            return server.articles.get()
+            return server.articles.getPart(0, perPage)
                 .then(function (newData) {
-                    articles(newData);
+                    itemsOnPage(newData.data);
+                    totalPages(newData.totalCount / perPage);
                 });
         },
         articles: itemsOnPage,

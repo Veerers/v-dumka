@@ -1,6 +1,7 @@
 .article-container
     h1.title(data-bind='text: article().title')
-    ul.tags(data-bind='foreach: article().tags')
-        li.p(data-bind='text: $data')
-    p(data-bind='text: article().text')
-    p(data-bind='text: article().date')
+    ul.tags-list(href='#', data-bind='foreach: article().tags')
+        li.article-tag
+            a.tag-link(data-bind='text: $data')
+    div.article-date(data-bind='text: article().date')
+    div.article-text(data-bind='text: article().text')

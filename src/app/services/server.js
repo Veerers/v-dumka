@@ -48,6 +48,17 @@ define(function (require) {
                     url: 'api/blog/' + title,
                     dataType: 'json'
                 }));
+            },
+            getPart: function (from, count){
+                return q($.ajax({
+                    type: 'GET',
+                    url: 'api/blog',
+                    dataType: 'json',
+                    data: {
+                        from: from,
+                        count: count
+                    }
+                }));
             }
         }
     };

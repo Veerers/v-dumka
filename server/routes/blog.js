@@ -2,11 +2,34 @@
 'use strict';
 
 var router = require('express').Router();
+var async = require('async');
 
 router.get('/', function (req, res) {
-    req.db.articles.find(function (err, results) {
-        res.json(results);
-    });
+    if (req.query.from || req.query.count) {
+        async.series([
+            function(callback){
+                req.db.articles
+                    .count({}, function (err, count){
+                        if(err) next(err);
+                        callback(null, count);
+                    })
+            },
+            function(callback){
+                req.db.articles
+                    .find()
+                    .skip(req.query.from || 0)
+                    .limit(req.query.count)
+                    .exec(function (err, results) {
+                        callback(null, results);
+                    });
+            }], function (err, results){
+                res.json({totalCount: results[0], data: results[1]});
+            });
+    } else {
+        req.db.articles.find(function (err, results) {
+            res.json(results);
+        });
+    }
 });
 
 router.get('/:id', function (req, res) {
