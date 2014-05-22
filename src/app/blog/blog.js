@@ -12,13 +12,17 @@ define(function (require) {
 
     var itemsOnPage = ko.observableArray();
 
-    return {
-        activate: function () {
-            return server.articles.getPart(0, perPage)
+    var updatePage = function(){
+        return server.articles.getPart((currentPage() - 1) * perPage, perPage)
                 .then(function (newData) {
                     itemsOnPage(newData.data);
                     totalPages(newData.totalCount / perPage);
                 });
+    }
+
+    return {
+        activate: function () {
+            return updatePage();
         },
         articles: itemsOnPage,
         paging: {
@@ -26,15 +30,18 @@ define(function (require) {
             last: totalPages,
             goTo: function (page) {
                 currentPage(+page);
+                updatePage();
             },
             next: function () {
                 if (currentPage() < totalPages()) {
                     currentPage(currentPage() + 1);
+                    updatePage();
                 }
             },
             prev: function () {
                 if (currentPage() > 1) {
                     currentPage(currentPage() - 1);
+                    updatePage();
                 }
             }
         }

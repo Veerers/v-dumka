@@ -10,17 +10,16 @@ router.get('/', function (req, res) {
             count: function(callback){
                 req.db.articles
                     .count({}, function (err, count){
-                        if(err) next(err);
-                        callback(null, count);
+                        callback(err, count);
                     })
             },
             data: function(callback){
                 req.db.articles
                     .find()
-                    .skip(req.query.from || 0)
+                    .skip(req.query.from)
                     .limit(req.query.count)
                     .exec(function (err, results) {
-                        callback(null, results);
+                        callback(err, results);
                     });
             }}, function (err, results){
                 res.json({totalCount: results.count, data: results.data});
