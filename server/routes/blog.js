@@ -6,15 +6,15 @@ var async = require('async');
 
 router.get('/', function (req, res) {
     if (req.query.from || req.query.count) {
-        async.series([
-            function(callback){
+        async.series({
+            count: function(callback){
                 req.db.articles
                     .count({}, function (err, count){
                         if(err) next(err);
                         callback(null, count);
                     })
             },
-            function(callback){
+            data: function(callback){
                 req.db.articles
                     .find()
                     .skip(req.query.from || 0)
@@ -22,8 +22,8 @@ router.get('/', function (req, res) {
                     .exec(function (err, results) {
                         callback(null, results);
                     });
-            }], function (err, results){
-                res.json({totalCount: results[0], data: results[1]});
+            }}, function (err, results){
+                res.json({totalCount: results.count, data: results.data});
             });
     } else {
         req.db.articles.find(function (err, results) {
