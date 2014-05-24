@@ -1,7 +1,5 @@
 .blog-container {
-	text-align: justify;
 	margin: 0;
-    background-color: #fff;
 	padding: @padding-large-vertical 0;
 
 	a {
@@ -17,8 +15,6 @@
         width: 10 / 12 * 100%;
         max-width: @screen-sm;
         margin: 0 auto;
-        background-color: #fff;
-        .lh-border-radius(@border-radius-large);
 
         .article-row:last-child{
             border-bottom: none;
@@ -26,28 +22,26 @@
         }
 
     	.article-row {
-            border-bottom: @border-radius-base solid @gray;
+            border-bottom: 1px solid @gray-light;
             margin: 0 @padding-base-horizontal;
             padding-top: @padding-large-vertical;
 
       		.info-row {
 
       			.article-title{
-      				display: block;
                     text-align: left;
                     padding-left: @padding-base-horizontal;
                     width: 6 / 12 * 100%;
-                    margin-top: @font-size-base - @font-size-large;
       			}
 
       			.article-description{
+                    text-align: justify;
       				padding-left: @padding-base-horizontal;
       				font-size: @font-size-base;
       			}
 
                 .read-more{
                     padding-left: @padding-base-horizontal;
-                    font-size: @font-size-base;
                 }
 
                 .tags-list{

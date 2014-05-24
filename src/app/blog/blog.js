@@ -8,15 +8,17 @@ define(function (require) {
 
     var perPage = 5;
     var currentPage = ko.observable(1);
-    var totalPages = ko.observable();
-
+    var countOfArticles = ko.observable();
+    var totalPages = ko.computed(function(){
+        return Math.ceil(countOfArticles() / perPage);
+    });
     var itemsOnPage = ko.observableArray();
 
     var updatePage = function(){
         return server.articles.getPart((currentPage() - 1) * perPage, perPage)
                 .then(function (newData) {
                     itemsOnPage(newData.data);
-                    totalPages(newData.totalCount / perPage);
+                    countOfArticles(newData.totalCount);
                 });
     }
 
