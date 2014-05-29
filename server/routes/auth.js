@@ -8,14 +8,6 @@ router.get('/test', require('../ensureAuth.js'), function (req, res) {
     res.send(200);
 });
 
-router.get('/github',
-    passport.authenticate('github', {
-        scope: 'read:org'
-    }),
-    function (req, res) {
-        res.send(200);
-    });
-
 router.get('/github/callback',
     passport.authenticate('github'),
     function (req, res) {
