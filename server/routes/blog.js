@@ -2,15 +2,16 @@
 'use strict';
 
 var router = require('express').Router();
+var Article = require('mongoose').model('Article');
 
 router.get('/', function (req, res) {
-    req.db.articles.find(function (err, results) {
+    Article.find(function (err, results) {
         res.json(results);
     });
 });
 
 router.get('/:id', function (req, res) {
-    req.db.articles.findOne({
+    Article.findOne({
         title: req.params.id
     }, function (err, results) {
         res.json(results);

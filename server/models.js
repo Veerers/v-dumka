@@ -1,23 +1,24 @@
 /*jslint node:true*/
-var Schema = require('mongoose').Schema;
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
-module.exports.book = new Schema({
+mongoose.model('Book', new Schema({
     title: String,
     author: String,
     year: Number,
     publisher: String,
     review: String,
     tags: [String]
-});
+}), 'books');
 
-module.exports.article = new Schema({
+mongoose.model('Article', new Schema({
     title: String,
     date: String,
     text: String,
     tags: [String]
-});
+}), 'articles');
 
-module.exports.cachestamps = new Schema({
+mongoose.model('Cachestamp', new Schema({
     collectionName: String,
     timestamp: Date
-});
+}), 'cachestamps');
