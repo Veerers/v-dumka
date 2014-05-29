@@ -8,7 +8,7 @@ define(function (require) {
 
     var isAuth = ko.observable(false);
 
-    $.get('/api/auth/is', isAuth.bind(null, true));
+    $.get('/api/auth/test', isAuth.bind(null, true));
 
     return {
         isAuth: isAuth
