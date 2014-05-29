@@ -1,4 +1,4 @@
-/*jslint nomen: true, vars: true, browser: true*/
+/*jslint nomen: true, vars: true, browser: true, unparam:true*/
 /*global define*/
 define(function (require) {
     'use strict';

@@ -1,3 +1,4 @@
+/*jslint node:true,vars:true,unparam:true*/
 'use strict';
 
 var passport = require('passport');
