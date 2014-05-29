@@ -29,7 +29,7 @@ passport.use(new GitHubStrategy(config.gh, function (accessToken, refreshToken, 
 }));
 
 module.exports = function (app) {
-    app.use(require('cookie-parser')(process.env.VDUMKA_SECRET || config.sessionSecret || 'test'));
+    app.use(require('cookie-parser')(config.sessionSecret));
     app.use(require('express-session')());
     app.use(passport.initialize());
     app.use(passport.session());

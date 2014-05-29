@@ -4,13 +4,13 @@
 var config = require('../config.json');
 var isProduction = process.env.NODE_ENV === 'production';
 
-require('mongoose').connect(process.env.VDUMKA_MONGO_CONNECTION_STRING || config.mongo);
+require('mongoose').connect(config.mongo);
 require('./models');
 
 var express = require('express');
 var app = express();
 
-app.set('port', process.env.VDUMKA_PORT || process.env.PORT || config.port || 3000);
+app.set('port', config.port);
 
 app.use(require('body-parser')());
 app.use(require('compression')());

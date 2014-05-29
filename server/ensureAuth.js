@@ -1,5 +1,6 @@
 /*jslint node:true*/
+'use strict';
+
 module.exports = function (req, res, next) {
-    'use strict';
     return req.isAuthenticated() ? next() : res.send(401);
 };
