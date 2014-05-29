@@ -4,7 +4,7 @@
 var router = require('express').Router();
 var passport = require('passport');
 
-router.get('/test', require('../ensureAuth.js'), function (req, res) {
+router.get('/test', require('../ensureAuth'), function (req, res) {
     res.send(200);
 });
 

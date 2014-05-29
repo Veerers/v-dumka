@@ -1,7 +1,7 @@
-/*jslint node: true, unparam: true, nomen: true, vars: true*/
+/*jslint node:true,unparam:true,nomen:true,vars:true,stupid:true*/
 'use strict';
 
-var config = require('../config.json');
+var config = require('./config');
 var isProduction = process.env.NODE_ENV === 'production';
 
 require('mongoose').connect(config.mongo);
@@ -17,9 +17,10 @@ app.use(require('compression')());
 require('./passportConfig')(app);
 app.use(express.static(__dirname + (isProduction ? '/../public' : '/../src')));
 
-app.use('/api/books', require('./routes/books'));
-app.use('/api/blog', require('./routes/blog'));
-app.use('/api/auth', require('./routes/auth'));
+require('fs').readdirSync(__dirname + '/routes').forEach(function (route) {
+    var fileName = route.substr(0, route.indexOf('.js'));
+    app.use('/api/' + fileName, require('./routes/' + fileName));
+});
 
 var server = app.listen(app.get('port'), function () {
     console.log('Listening on port ' + server.address().port);

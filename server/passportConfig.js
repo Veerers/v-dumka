@@ -3,7 +3,7 @@
 
 var passport = require('passport');
 var GitHubStrategy = require('passport-github').Strategy;
-var config = require('../config.json');
+var config = require('./config');
 var request = require('request');
 
 passport.serializeUser(function (user, done) {
