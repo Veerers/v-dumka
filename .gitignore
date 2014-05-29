@@ -6,3 +6,4 @@ src/libs
 src/main.css
 node_modules
 src/app/**/*.html
+config.json

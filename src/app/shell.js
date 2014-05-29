@@ -45,6 +45,16 @@ define(function (require) {
                 isMain: false,
                 img: 'events'
             }]);
+
+            router.guardRoute = function (instance, instuction) {
+                if (instuction.queryParams && instuction.queryParams.hasOwnProperty('auth')) {
+                    window.open('/api/auth/github', '', 'width=800, height=600');
+                    var hash = window.location.hash;
+                    window.location.hash = hash.slice(0, hash.indexOf('?'));
+                }
+                return true;
+            };
+
             return router.activate();
         }
     };

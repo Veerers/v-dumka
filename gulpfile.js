@@ -65,7 +65,7 @@
         gulp.watch('src/app/**/*.jade', ['dev:jade']);
         gulp.watch('src/bower.json', ['dev:bower']);
         gulp.watch(['src/main.less', 'src/app/**/*.less'], ['dev:less']);
-        gulp.watch(['src/app/**/*.js', 'server/**/*.js'], ['lint']);
+        // gulp.watch(['src/app/**/*.js', 'server/**/*.js'], ['lint']);
 
         var server = livereload();
         gulp.watch(['src/**/*.js', 'src/**/*.html'])
