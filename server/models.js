@@ -20,5 +20,5 @@ mongoose.model('Article', new Schema({
 
 mongoose.model('Cachestamp', new Schema({
     collectionName: String,
-    timestamp: Date
+    timestamp: String
 }), 'cachestamps');

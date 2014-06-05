@@ -6,24 +6,36 @@ var Cachestamp = require('mongoose').model('Cachestamp');
 var Book = require('mongoose').model('Book');
 
 router.get('/', function (req, res) {
-    if (req.query.timestamp) {
-        Cachestamp.findOne({
-            collectionName: 'books'
-        }, function (err, result) {
-            res.json({
-                timestamp: result.timestamp
-            });
-        });
-    } else if (req.query.from || req.query.count) {
+    if (req.query.from || req.query.count) {
+        res.header('Cache-Control', 'no-cache');
         Book.find()
             .skip(req.query.from || 0)
             .limit(req.query.count)
             .exec(function (err, results) {
+                if (err) {
+                    res.send(500);
+                }
                 res.json(results);
             });
     } else {
-        Book.find(function (err, results) {
-            res.json(results);
+        var oldEtag = req.headers['if-none-match'];
+        Cachestamp.findOne({
+            collectionName: 'books'
+        }, function (err, result) {
+            if (err) {
+                res.send(500);
+            }
+            if (result.timestamp === oldEtag) {
+                res.send(304);
+            } else {
+                Book.find(function (err, results) {
+                    if (err) {
+                        res.send(500);
+                    }
+                    res.header('Etag', result.timestamp);
+                    res.json(results);
+                });
+            }
         });
     }
 });
