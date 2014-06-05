@@ -5,7 +5,7 @@ var router = require('express').Router();
 var Cachestamp = require('mongoose').model('Cachestamp');
 var Book = require('mongoose').model('Book');
 
-router.get('/', function (req, res) {
+router.get('/', function (req, res, next) {
     if (req.query.from || req.query.count) {
         res.header('Cache-Control', 'no-cache');
         Book.find()
@@ -13,7 +13,7 @@ router.get('/', function (req, res) {
             .limit(req.query.count)
             .exec(function (err, results) {
                 if (err) {
-                    res.send(500);
+                    return next(err);
                 }
                 res.json(results);
             });
@@ -23,14 +23,14 @@ router.get('/', function (req, res) {
             collectionName: 'books'
         }, function (err, result) {
             if (err) {
-                res.send(500);
+                return next(err);
             }
             if (result.timestamp === oldEtag) {
                 res.send(304);
             } else {
                 Book.find(function (err, results) {
                     if (err) {
-                        res.send(500);
+                        return next(err);
                     }
                     res.header('Etag', result.timestamp);
                     res.json(results);
