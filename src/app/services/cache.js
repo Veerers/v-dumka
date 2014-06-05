@@ -15,7 +15,7 @@ define(function (require) {
             data: cached.books,
             update: function () {
                 return server.books.get({}, function (oldCached) {
-                    if (oldCached.length) {
+                    if (oldCached && oldCached.length) {
                         cached.books(oldCached);
                     } else {
                         server.books.get({from: 0, count: 20})
