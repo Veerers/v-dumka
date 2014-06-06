@@ -1,7 +1,7 @@
 .blog-container {
     margin: 0;
     padding: @padding-large-vertical 0;
-	a {
+    a {
         .lh-transition(opacity .2s);
         .lh-opacity(.8);
     }
@@ -17,17 +17,16 @@
         .article-row {
             border-top: 1px solid @gray-lighter;
             margin: @padding-large-vertical * 3 @padding-base-horizontal;
-            padding-top: @padding-large-vertical;
             .article-date {
                 position: relative;
-                top: -28px;
+                top: -@font-size-base / 2;
+                line-height: 1;
                 text-align: center;
                 color: @gray-light;
-                margin-bottom: -20px;
                 .article-date-value {
                     background: #fff;
-                    border-right: 15px solid #fff;
-                    border-left: 15px solid #fff;
+                    border-right: @padding-base-horizontal solid #fff;
+                    border-left: @padding-base-horizontal solid #fff;
                 }
             }
             .title-link {
