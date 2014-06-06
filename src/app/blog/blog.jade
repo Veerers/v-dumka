@@ -1,16 +1,15 @@
 .blog-container
     ul.articles-list(data-bind='foreach: articles')
         li.article-row
-            .info-row
-                a(data-bind='attr: {href: "#/blog/" + title}')
-                    h3.article-title(data-bind='text: title')
-                div.article-description(data-bind='text: description')
-                a(data-bind='attr: {href: "#/blog/" + title}')
-                    p.read-more(data-i18n='read-more')
-                ul.tags-list(data-bind='foreach: tags')
-                        li.article-tag
-                            a.tag-link(data-bind='text: $data', href='#/blog')
-                div.article-date(data-bind='text: date')
+            .article-date
+                span.article-date-value(data-bind='text: moment(date, "YYYY-MM-DD").format("D MMMM YYYY")')
+            a.title-link(data-bind='attr: {href: "#/blog/" + title}')
+                h3.article-title(data-bind='text: title')
+            .article-description(data-bind='text: description')
+            a.read-more(data-bind='attr: {href: "#/blog/" + title}', data-i18n='read-more')
+            ul.tags-list(data-bind='foreach: tags')
+                    li.article-tag
+                        a.tag-link(data-bind='text: $data', href='#/blog')
     ul.articles-paging
         li.first-page(data-bind='click: paging.goTo.bind(null, 1)') 1
         li.prev-page(data-bind='style: {visibility: paging.current() > 1 ? "visible" : "hidden"}, click: paging.prev')

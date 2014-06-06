@@ -5,6 +5,7 @@ define(function (require) {
 
     var server = require('services/server');
     var ko = require('knockout');
+    var moment = require('moment');
 
     var perPage = 5;
     var currentPage = ko.observable(1);
@@ -46,6 +47,7 @@ define(function (require) {
                     updatePage();
                 }
             }
-        }
+        },
+        moment: moment
     };
 });
