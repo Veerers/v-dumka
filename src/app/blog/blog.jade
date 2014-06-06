@@ -5,7 +5,7 @@
                 span.article-date-value(data-bind='text: moment(date, "YYYY-MM-DD").format("D MMMM YYYY")')
             a.title-link(href="#", data-bind='attr: {href: "#/blog/" + title}')
                 h3.article-title(data-bind='text: title')
-            .article-description(data-bind='text: description')
+            .article-description(data-bind='html: description')
             a.read-more(href="#", data-bind='attr: {href: "#/blog/" + title}', data-i18n='read-more')
             ul.tags-list(data-bind='foreach: tags')
                     li.article-tag
