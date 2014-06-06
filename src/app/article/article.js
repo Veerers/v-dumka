@@ -4,6 +4,9 @@ define(function (require) {
     'use strict';
     var server = require('services/server');
     var ko = require('knockout');
+    var moment = require('moment');
+
+    var history = require('plugins/history');
 
     var article = ko.observable();
     return {
@@ -13,6 +16,10 @@ define(function (require) {
                     article(newData);
                 });
         },
-        article: article
+        article: article,
+        moment: moment,
+        goBack: function(){
+            history.navigateBack();
+        }
     };
 });
