@@ -3,10 +3,10 @@
         li.article-row
             .article-date
                 span.article-date-value(data-bind='text: moment(date, "YYYY-MM-DD").format("D MMMM YYYY")')
-            a.title-link(data-bind='attr: {href: "#/blog/" + title}')
+            a.title-link(href="#", data-bind='attr: {href: "#/blog/" + title}')
                 h3.article-title(data-bind='text: title')
             .article-description(data-bind='text: description')
-            a.read-more(data-bind='attr: {href: "#/blog/" + title}', data-i18n='read-more')
+            a.read-more(href="#", data-bind='attr: {href: "#/blog/" + title}', data-i18n='read-more')
             ul.tags-list(data-bind='foreach: tags')
                     li.article-tag
                         a.tag-link(data-bind='text: $data', href='#/blog')

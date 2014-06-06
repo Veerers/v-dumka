@@ -1,8 +1,8 @@
 .article-container
     h1.title(data-bind='text: article().title')
-    ul.tags-list(href='#', data-bind='foreach: article().tags')
+    ul.tags-list(data-bind='foreach: article().tags')
         li.article-tag
-            a.tag-link(data-bind='text: $data')
+            a.tag-link(data-bind='text: $data', href='#')
     div.article-date(data-bind='text: article().date')
     div.article-text(data-bind='text: article().text')
     a.go-back(data-i18n="go-back", href='#/blog')
