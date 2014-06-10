@@ -8,14 +8,15 @@ mongoose.model('Book', new Schema({
     year: Number,
     publisher: String,
     review: String,
-    tags: [String]
+    tags: {type: [String], index: true }
 }), 'books');
 
 mongoose.model('Article', new Schema({
-    title: String,
-    date: String,
+    title: { type: String, index: true },
+    date: { type: Date, index: true },
     text: String,
-    tags: [String]
+    description: String,
+    tags: { type: [String], index: true }
 }), 'articles');
 
 mongoose.model('Cachestamp', new Schema({
