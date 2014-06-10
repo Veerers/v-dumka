@@ -1,4 +1,4 @@
-/*jslint nomen: true, vars: true*/
+/*jslint nomen:true,vars:true*/
 /*global define*/
 define(function (require) {
     'use strict';
@@ -18,7 +18,7 @@ define(function (require) {
         },
         article: article,
         moment: moment,
-        goBack: function(){
+        goBack: function () {
             history.navigateBack();
         }
     };

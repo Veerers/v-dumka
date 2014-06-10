@@ -1,4 +1,4 @@
-/*jslint nomen: true, vars: true, browser: true*/
+/*jslint nomen: true, vars: true, browser: true, unparam:true*/
 /*global define*/
 define(function (require) {
     'use strict';
@@ -45,6 +45,16 @@ define(function (require) {
                 isMain: false,
                 img: 'events'
             }]);
+
+            router.guardRoute = function (instance, instuction) {
+                if (instuction.queryParams && instuction.queryParams.hasOwnProperty('auth')) {
+                    window.open('/api/auth/github/callback', '', 'width=800, height=600');
+                    var hash = window.location.hash;
+                    window.location.hash = hash.slice(0, hash.indexOf('?'));
+                }
+                return true;
+            };
+
             return router.activate();
         }
     };

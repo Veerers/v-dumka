@@ -1,4 +1,4 @@
-/*jslint nomen: true, vars: true, unparam: true*/
+/*jslint browser: true, nomen: true, vars: true, unparam: true*/
 /*global requirejs, define*/
 (function () {
     'use strict';
@@ -31,6 +31,7 @@
         var $ = require('jquery');
         var Q = require('q');
         var i18next = require('i18next');
+        var auth = require('services/auth');
 
         // init plugins
         require('bootstrap');
@@ -57,6 +58,10 @@
                 return promise;
             };
             return deferred;
+        };
+
+        window.auth = function () {
+            auth.isAuth(true);
         };
 
         var i18NOptions = {

@@ -1,3 +1,4 @@
+.idea
 v-dumka.sublime-workspace
 v-dumka.sublime-project
 
@@ -6,3 +7,5 @@ src/libs
 src/main.css
 node_modules
 src/app/**/*.html
+
+env.sh

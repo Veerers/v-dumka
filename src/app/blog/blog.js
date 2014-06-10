@@ -1,4 +1,4 @@
-/*jslint nomen: true, vars: true*/
+/*jslint nomen:true,vars:true*/
 /*global define*/
 define(function (require) {
     'use strict';
@@ -10,18 +10,18 @@ define(function (require) {
     var perPage = 5;
     var currentPage = ko.observable(1);
     var countOfArticles = ko.observable();
-    var totalPages = ko.computed(function(){
+    var totalPages = ko.computed(function () {
         return Math.ceil(countOfArticles() / perPage);
     });
     var itemsOnPage = ko.observableArray();
 
-    var updatePage = function(){
+    var updatePage = function () {
         return server.articles.getPart((currentPage() - 1) * perPage, perPage)
-                .then(function (newData) {
-                    itemsOnPage(newData.data);
-                    countOfArticles(newData.totalCount);
-                });
-    }
+            .then(function (newData) {
+                itemsOnPage(newData.data);
+                countOfArticles(newData.totalCount);
+            });
+    };
 
     return {
         activate: function () {
