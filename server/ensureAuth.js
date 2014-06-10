@@ -2,5 +2,9 @@
 'use strict';
 
 module.exports = function (req, res, next) {
-    return req.isAuthenticated() ? next() : res.send(401);
+    if (req.isAuthenticated()) {
+        next();
+    } else {
+        res.send(401);
+    }
 };

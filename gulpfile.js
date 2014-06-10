@@ -1,4 +1,4 @@
-/*jslint nomen: true, vars: true, unparam: true*/
+/*jslint node:true,nomen:true,vars:true,unparam:true*/
 (function () {
     'use strict';
     var gulp = require('gulp');
@@ -53,7 +53,7 @@
     });
 
     gulp.task('dev:server-inspector', function () {
-        var inpector = spawn('node-inspector', ['--save-live-edit']);
+        var inpector = spawn('./node_modules/.bin/node-inspector', ['--save-live-edit']);
         inpector.stdout.pipe(process.stdout);
         inpector.stderr.pipe(process.stdout);
         process.on('exit', function () {
@@ -100,7 +100,7 @@
         gulp.src('src/libs/bootstrap/fonts/**').pipe(gulp.dest('public/libs/bootstrap/fonts'));
     });
 
-    gulp.task('prod:css', ['dev:less', 'dev'], function (done) {
+    gulp.task('prod:css', ['dev:less', 'dev'], function () {
         return gulp.src('src/main.css')
             .pipe(minifyCss({
                 processImport: true,
@@ -116,32 +116,6 @@
     });
 
     gulp.task('prod', ['prod:durandal', 'prod:resources', 'prod:css', 'prod:index']);
-
-    // RUN PROD
-
-    gulp.task('prod:server', function () {
-        var server = spawn('node', ['server/app.js']);
-        server.stdout.pipe(process.stdout);
-        server.stderr.pipe(process.stdout);
-        process.on('exit', function () {
-            server.kill();
-        });
-    });
-
-    gulp.task('prod:watch', ['prod', 'prod:server'], function () {
-        gulp.watch(['src/app/**/*.js', 'src/app/**/*.jade'], ['prod:durandal']);
-        gulp.watch(['src/img/**', 'src/locales/**'], ['prod:resources']);
-        gulp.watch('src/main.css', ['prod:css']);
-        gulp.watch('src/index.html', ['prod:index']);
-        gulp.watch(['src/app/**/*.js', 'server/**/*.js'], ['lint']);
-
-        var server = livereload();
-        gulp.watch('public/**')
-            .on('change', function (file) {
-                console.log(file.path, 'changed');
-                server.changed(file.path);
-            });
-    });
 
     // TOOLS
 
