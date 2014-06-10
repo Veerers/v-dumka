@@ -1,4 +1,4 @@
-/*jslint browser:true, nomen: true, vars: true*/
+/*jslint browser:true,nomen:true,vars:true,unparam:true*/
 /*global define*/
 define(function (require) {
     'use strict';
@@ -59,6 +59,17 @@ define(function (require) {
                     type: 'GET',
                     url: 'api/blog/' + title,
                     dataType: 'json'
+                }));
+            },
+            getPart: function (from, count) {
+                return q($.ajax({
+                    type: 'GET',
+                    url: 'api/blog',
+                    dataType: 'json',
+                    data: {
+                        from: from,
+                        count: count
+                    }
                 }));
             }
         }

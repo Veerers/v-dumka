@@ -1,6 +1,20 @@
-div(data-bind='foreach: articles')
-    a(data-bind='attr: {href: "#/blog/" + title}')
-        div(data-bind='text: title')
-    div(data-bind='text: date')
-    div(data-bind='foreach: tags')
-        p(data-bind='text: $data')
+.blog-container
+    ul.articles-list(data-bind='foreach: articles')
+        li.article-row
+            .article-date
+                span.article-date-value(data-bind='text: moment(date, "YYYY-MM-DD").format("D MMMM YYYY")')
+            a.title-link(href="#", data-bind='attr: {href: "#/blog/" + title}')
+                h3.article-title(data-bind='text: title')
+            .article-description(data-bind='html: description')
+            a.read-more(href="#", data-bind='attr: {href: "#/blog/" + title}', data-i18n='read-more')
+            ul.tags-list(data-bind='foreach: tags')
+                    li.article-tag
+                        a.tag-link(data-bind='text: $data', href='#/blog')
+    ul.articles-paging
+        li.first-page(data-bind='click: paging.goTo.bind(null, 1)') 1
+        li.prev-page(data-bind='style: {visibility: paging.current() > 1 ? "visible" : "hidden"}, click: paging.prev')
+        li.current-page(data-bind='text: paging.current')
+        li.next-page(data-bind='style: {visibility: paging.current() < paging.last() ? "visible" : "hidden"}, click: paging.next')
+        li.last-page(data-bind='text: paging.last, click: paging.goTo.bind(null, $data.paging.last())')
+
+                

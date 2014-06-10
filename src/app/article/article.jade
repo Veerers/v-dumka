@@ -1,6 +1,10 @@
-div
-    h2(data-bind='text: article().title')
-    p(data-bind='text: article().text')
-    div(data-bind='foreach: article().tags')
-        p(data-bind='text: $data')
-    p(data-bind='text: article().date')
+.article-container
+    .article
+        .article-date
+            span.article-date-value(data-bind='text: moment(article().date, "YYYY-MM-DD").format("D MMMM YYYY")')
+        h1.title(data-bind='text: article().title')
+        .article-text(data-bind='html: article().text')
+        a.go-back(data-i18n="go-back", href='#', data-bind='click: goBack')
+        ul.tags-list(data-bind='foreach: article().tags')
+            li.article-tag
+                a.tag-link(data-bind='text: $data', href='#')
